@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Centre de Notifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#945b00",
+                    "on-background": "#191c20",
+                    "surface-tint": "#02629e",
+                    "primary-fixed-dim": "#9acbff",
+                    "on-tertiary-fixed-variant": "#673d00",
+                    "inverse-primary": "#9acbff",
+                    "primary-fixed": "#cfe5ff",
+                    "on-tertiary-container": "#ffe3c8",
+                    "tertiary-fixed-dim": "#ffb865",
+                    "secondary-fixed-dim": "#7ed99e",
+                    "secondary-fixed": "#9af6b8",
+                    "surface-container-high": "#e6e8ed",
+                    "on-primary-fixed": "#001d34",
+                    "border": "#E0E7EF",
+                    "tertiary-fixed": "#ffddba",
+                    "success": "#27AE60",
+                    "surface-container": "#eceef3",
+                    "outline-variant": "#c0c7d1",
+                    "secondary-container": "#97f3b5",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "warning-light": "#FEF4E7",
+                    "secondary": "#006d3d",
+                    "surface-variant": "#e1e2e8",
+                    "on-tertiary-fixed": "#2b1700",
+                    "primary-container": "#1b6ca8",
+                    "success-light": "#EBF7EF",
+                    "on-surface-variant": "#414750",
+                    "on-error": "#ffffff",
+                    "surface": "#FFFFFF",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#00210f",
+                    "surface-bright": "#f8f9ff",
+                    "on-secondary": "#ffffff",
+                    "warning": "#F39C12",
+                    "on-primary-fixed-variant": "#004a78",
+                    "primary": "#005387",
+                    "on-secondary-fixed-variant": "#00522d",
+                    "surface-container-highest": "#e1e2e8",
+                    "surface-container-low": "#f2f3f9",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c20",
+                    "error": "#E74C3C",
+                    "tertiary": "#734600",
+                    "text-main": "#1A1A2E",
+                    "surface-dim": "#d8dadf",
+                    "on-secondary-container": "#047240",
+                    "error-container": "#ffdad6",
+                    "outline": "#717881",
+                    "inverse-on-surface": "#eff0f6",
+                    "background": "#F5F7FA",
+                    "text-muted": "#7F8C9A",
+                    "inverse-surface": "#2e3135",
+                    "on-primary-container": "#d9e9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "screen-edge": "20px",
+                    "base": "4px",
+                    "xs": "4px",
+                    "form-gap": "16px",
+                    "3xl": "64px",
+                    "section-v": "24px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "card-gap": "12px",
+                    "sm": "8px",
+                    "xl": "32px",
+                    "2xl": "48px"
+            },
+            "fontFamily": {
+                    "body-secondary": [
+                            "Be Vietnam Pro"
+                    ],
+                    "button-label": [
+                            "Be Vietnam Pro"
+                    ],
+                    "h1": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "price-display": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "h2": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "code-mono": [
+                            "monospace"
+                    ],
+                    "h3": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-main": [
+                            "Be Vietnam Pro"
+                    ]
+            },
+            "fontSize": {
+                    "body-secondary": [
+                            "13px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "button-label": [
+                            "15px",
+                            {
+                                    "lineHeight": "1",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "h1": [
+                            "28px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "-0.3px",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "price-display": [
+                            "20px",
+                            {
+                                    "lineHeight": "1",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "h2": [
+                            "22px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "letterSpacing": "-0.3px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "code-mono": [
+                            "13px",
+                            {
+                                    "lineHeight": "1",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "h3": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-main": [
+                            "15px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-[80px]">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface shadow-sm px-screen-edge h-16 flex items-center justify-between">
+<button aria-label="Retour" class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-low hover:bg-surface-container active:scale-95 transition-all text-primary-container">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-h2 text-h2 text-text-main absolute left-1/2 -translate-x-1/2">Notifications</h1>
+<button class="font-button-label text-button-label text-primary-container active:scale-95 transition-all">Tout lu</button>
+</header>
+<main class="pt-[88px] px-screen-edge pb-section-v">
+<!-- Tabs -->
+<div class="flex overflow-x-auto gap-sm mb-section-v pb-sm no-scrollbar">
+<button class="whitespace-nowrap px-md py-sm rounded-full bg-primary-container text-on-primary font-body-secondary text-body-secondary active:scale-95 transition-all">Toutes</button>
+<button class="whitespace-nowrap px-md py-sm rounded-full bg-surface-container-low text-text-muted font-body-secondary text-body-secondary flex items-center gap-2 active:scale-95 transition-all">
+                Non lues
+                <span class="bg-error text-on-error rounded-full px-2 py-0.5 text-[10px] font-bold">3</span>
+</button>
+<button class="whitespace-nowrap px-md py-sm rounded-full bg-surface-container-low text-text-muted font-body-secondary text-body-secondary active:scale-95 transition-all">Missions</button>
+<button class="whitespace-nowrap px-md py-sm rounded-full bg-surface-container-low text-text-muted font-body-secondary text-body-secondary active:scale-95 transition-all">Paiements</button>
+<button class="whitespace-nowrap px-md py-sm rounded-full bg-surface-container-low text-text-muted font-body-secondary text-body-secondary active:scale-95 transition-all">Marché</button>
+</div>
+<!-- Groups -->
+<div class="space-y-lg">
+<!-- Group: Aujourd'hui -->
+<section>
+<h2 class="font-h3 text-h3 text-text-main mb-card-gap">Aujourd'hui</h2>
+<div class="space-y-card-gap">
+<!-- Notification 1 (Unread) -->
+<div class="bg-[#EBF4FB] rounded-xl p-md shadow-sm border border-primary-container/20 relative overflow-hidden active:scale-[0.99] transition-transform">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container rounded-l-xl"></div>
+<div class="flex gap-md">
+<div class="w-12 h-12 rounded-full bg-white flex flex-shrink-0 items-center justify-center text-primary-container shadow-sm">
+<span class="material-symbols-outlined" data-icon="work" data-weight="fill" style="font-variation-settings: 'FILL' 1;">work</span>
+</div>
+<div class="flex-1">
+<p class="font-body-main text-body-main text-text-main font-semibold mb-1">Nouvelle candidature pour votre mission Récolte</p>
+<p class="font-body-secondary text-body-secondary text-text-muted mb-3">Il y a 5 min</p>
+<button class="w-full h-[40px] rounded-lg bg-surface text-primary-container border border-primary-container/30 font-button-label text-button-label active:scale-97 transition-all shadow-sm">Voir la candidature</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Group: Hier -->
+<section>
+<h2 class="font-h3 text-h3 text-text-main mb-card-gap">Hier</h2>
+<div class="space-y-card-gap">
+<!-- Notification 2 (Read) -->
+<div class="bg-surface rounded-xl p-md shadow-sm border border-border active:scale-[0.99] transition-transform">
+<div class="flex gap-md">
+<div class="w-12 h-12 rounded-full bg-success-light flex flex-shrink-0 items-center justify-center text-success shadow-sm">
+<span class="material-symbols-outlined" data-icon="payments" data-weight="fill" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<div class="flex-1">
+<p class="font-body-main text-body-main text-text-main mb-1">Paiement de 45 000 FCFA reçu</p>
+<p class="font-body-secondary text-body-secondary text-text-muted mb-3">Hier</p>
+<button class="w-full h-[40px] rounded-lg bg-surface text-text-main border border-border font-button-label text-button-label active:scale-97 transition-all shadow-sm hover:bg-surface-container-low">Voir le portefeuille</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Group: Cette semaine -->
+<section>
+<h2 class="font-h3 text-h3 text-text-main mb-card-gap">Cette semaine</h2>
+<div class="space-y-card-gap">
+<!-- Notification 3 (Read) -->
+<div class="bg-surface rounded-xl p-md shadow-sm border border-border active:scale-[0.99] transition-transform">
+<div class="flex gap-md">
+<div class="w-12 h-12 rounded-full bg-warning-light flex flex-shrink-0 items-center justify-center text-warning shadow-sm">
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="flex-1">
+<p class="font-body-main text-body-main text-text-main mb-1">Vous avez reçu un nouvel avis</p>
+<p class="font-body-secondary text-body-secondary text-text-muted">Il y a 2 jours</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on desktop, shown on mobile as per requirement, though usually suppressed on deeper navigational views. Kept here based on prompt request but realistically might be suppressed depending on full app flow. Will render as requested by shared components) -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-white dark:bg-slate-900 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] md:hidden">
+<div class="flex justify-around items-center h-[64px] px-4 w-full">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 font-['Plus_Jakarta_Sans'] text-[12px] font-medium active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span>Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 font-['Plus_Jakarta_Sans'] text-[12px] font-medium active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span>Market</span>
+</a>
+<a class="flex flex-col items-center justify-center text-blue-700 dark:text-blue-400 relative after:content-[''] after:block after:w-1 after:h-1 after:bg-orange-500 after:rounded-full after:mt-1 font-['Plus_Jakarta_Sans'] text-[12px] font-medium active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="notifications" data-weight="fill" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span>Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 font-['Plus_Jakarta_Sans'] text-[12px] font-medium active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span>Profile</span>
+</a>
+</div>
+</nav>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

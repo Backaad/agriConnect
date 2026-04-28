@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Catalogue Produits - AgriConnect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#191c20",
+                        "tertiary-fixed-dim": "#ffb865",
+                        "on-tertiary-container": "#ffe3c8",
+                        "surface-variant": "#e1e2e8",
+                        "primary-container": "#1b6ca8",
+                        "inverse-surface": "#2e3135",
+                        "on-surface": "#191c20",
+                        "on-secondary-fixed": "#00210f",
+                        "background": "#F5F7FA",
+                        "surface-container-low": "#f2f3f9",
+                        "error": "#E74C3C",
+                        "surface-container-highest": "#e1e2e8",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#FFFFFF",
+                        "surface-container": "#eceef3",
+                        "on-secondary-fixed-variant": "#00522d",
+                        "error-container": "#ffdad6",
+                        "text-main": "#1A1A2E",
+                        "surface-container-high": "#e6e8ed",
+                        "secondary": "#006d3d",
+                        "on-primary-fixed": "#001d34",
+                        "primary-fixed": "#cfe5ff",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#9af6b8",
+                        "tertiary-fixed": "#ffddba",
+                        "success": "#27AE60",
+                        "secondary-container": "#97f3b5",
+                        "surface-dim": "#d8dadf",
+                        "border": "#E0E7EF",
+                        "on-tertiary-fixed-variant": "#673d00",
+                        "on-tertiary-fixed": "#2b1700",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#7ed99e",
+                        "success-light": "#EBF7EF",
+                        "on-surface-variant": "#414750",
+                        "inverse-on-surface": "#eff0f6",
+                        "tertiary-container": "#945b00",
+                        "outline": "#717881",
+                        "primary-fixed-dim": "#9acbff",
+                        "text-muted": "#7F8C9A",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c0c7d1",
+                        "on-primary-container": "#d9e9ff",
+                        "on-secondary-container": "#047240",
+                        "on-primary-fixed-variant": "#004a78",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#9acbff",
+                        "primary": "#005387",
+                        "tertiary": "#734600",
+                        "warning": "#F39C12",
+                        "surface-bright": "#f8f9ff",
+                        "surface-tint": "#02629e",
+                        "warning-light": "#FEF4E7",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "base": "4px",
+                        "screen-edge": "20px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "card-gap": "12px",
+                        "section-v": "24px",
+                        "2xl": "48px",
+                        "sm": "8px",
+                        "form-gap": "16px",
+                        "3xl": "64px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Plus Jakarta Sans"],
+                        "body-secondary": ["Be Vietnam Pro"],
+                        "price-display": ["Plus Jakarta Sans"],
+                        "button-label": ["Be Vietnam Pro"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-main": ["Be Vietnam Pro"],
+                        "code-mono": ["monospace"],
+                        "h2": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "h3": ["18px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-secondary": ["13px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "price-display": ["20px", {"lineHeight": "1", "fontWeight": "700"}],
+                        "button-label": ["15px", {"lineHeight": "1", "fontWeight": "700"}],
+                        "h1": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.3px", "fontWeight": "800"}],
+                        "body-main": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "code-mono": ["13px", {"lineHeight": "1", "fontWeight": "400"}],
+                        "h2": ["22px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Hide scrollbar for clean chip horizontal scrolling */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-text-main font-body-main antialiased pb-3xl">
+<!-- TopAppBar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-white/95 dark:bg-slate-900/95 border-b border-slate-200 dark:border-slate-800 shadow-sm flex justify-between items-center h-16 px-5 backdrop-blur-md">
+<!-- Leading Avatar -->
+<div class="flex items-center gap-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors active:scale-[0.97] duration-200 rounded-full p-1 cursor-pointer">
+<img alt="Avatar utilisateur" class="w-8 h-8 rounded-full object-cover border-2 border-success" data-alt="Close up portrait of a confident young african farmer smiling warmly outdoors in natural sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIJpmbyGgfBLTLNGfI5Co5E7DMhiwKouN38GYBVct2gjKwLIuVPVFOEuvBbfWabMuJAEfgciVe6IO45-0OfnIQOZAHfGUDT5HKgwATjZ0dP9-BspI0fhE4ylAKFgFKaVU9hMQQgaVJ74N4u9PU7bNVJMIap-KhObAwSJP4YCjdxSMnVgSlVyFlW2C634BJx9Yn1vWoDFcdGdtHHZWLuendKnIMaYr1UR8nX00EDR9Vab_bg5aUy0SEVCy1hkpVCeHoF6bgpXQO2Cc"/>
+</div>
+<!-- Headline -->
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-xl font-extrabold text-[#1B6CA8] dark:text-sky-400 tracking-tight">AgriConnect</h1>
+<!-- Trailing Icon -->
+<button class="text-[#1B6CA8] dark:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors active:scale-[0.97] duration-200 rounded-full p-2 flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</header>
+<!-- Main Canvas Content -->
+<main class="pt-[88px] px-screen-edge flex flex-col gap-section-v">
+<!-- Search & Filter Row -->
+<section class="flex items-center gap-sm w-full">
+<div class="relative flex-1 flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-text-muted">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface border-[1.5px] border-border rounded-lg font-body-main text-body-main text-text-main placeholder:text-text-muted focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all shadow-[0_2px_8px_rgba(0,0,0,0.04)]" placeholder="Rechercher des produits..." type="text"/>
+</div>
+<button class="bg-surface border-[1.5px] border-border rounded-lg p-3 flex items-center justify-center text-text-main hover:bg-surface-container-low transition-colors active:scale-[0.97] shadow-[0_2px_8px_rgba(0,0,0,0.04)] h-[48px] w-[48px] shrink-0">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</section>
+<!-- Chips Row -->
+<section class="flex gap-sm overflow-x-auto no-scrollbar -mx-screen-edge px-screen-edge pb-2">
+<button class="px-4 py-2 bg-primary-container text-surface rounded-full font-body-secondary text-body-secondary font-bold whitespace-nowrap shadow-[0_4px_12px_rgba(27,108,168,0.2)]">Tout</button>
+<button class="px-4 py-2 bg-surface text-text-muted border border-border rounded-full font-body-secondary text-body-secondary whitespace-nowrap hover:bg-surface-container-low transition-colors">Légumes</button>
+<button class="px-4 py-2 bg-surface text-text-muted border border-border rounded-full font-body-secondary text-body-secondary whitespace-nowrap hover:bg-surface-container-low transition-colors">Fruits</button>
+<button class="px-4 py-2 bg-surface text-text-muted border border-border rounded-full font-body-secondary text-body-secondary whitespace-nowrap hover:bg-surface-container-low transition-colors">Céréales</button>
+<button class="px-4 py-2 bg-surface text-text-muted border border-border rounded-full font-body-secondary text-body-secondary whitespace-nowrap hover:bg-surface-container-low transition-colors">Volaille</button>
+<button class="px-4 py-2 bg-surface text-text-muted border border-border rounded-full font-body-secondary text-body-secondary whitespace-nowrap hover:bg-surface-container-low transition-colors">Bio</button>
+<button class="px-4 py-2 bg-surface text-text-muted border border-border rounded-full font-body-secondary text-body-secondary whitespace-nowrap hover:bg-surface-container-low transition-colors">Livraison dispo</button>
+</section>
+<!-- Grid View 2 Columns -->
+<section class="grid grid-cols-2 gap-card-gap">
+<!-- Card 1 -->
+<article class="bg-surface rounded-xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 hover:scale-[1.01] flex flex-col border border-surface-container">
+<div class="relative w-full aspect-square">
+<img alt="Tomates fraîches" class="w-full h-full object-cover" data-alt="Vibrant red organic tomatoes on the vine in bright morning sunlight, rustic wooden background, sharp focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4o5OMReYvDm_rziVIoIL6uoOs26g7GVySdqfbV1KXIQ0sgUvvjycYm9HiILy5Lc05iocVF5BAgOUc-8blJNEnHzcxQjqaZmvLr2LQMUZLDa-GBHafY296bUTe5dlCiJMXlK-8GCgkmuA4eMY15hq1qhs60w2eRd9joLixg8tqdNpUVqiSRbC7JKkDqpJNlJZvgvxI_Rwk3dl01-clnhIDK3SQqMFo70gOU-A8y1ZrVFdvYdnTwvVAAks0Y-asYjC2Pn-Ae8aR4q8"/>
+<div class="absolute top-2 left-2 bg-success-light px-2 py-1 rounded-full flex items-center gap-1 shadow-sm backdrop-blur-sm bg-white/80">
+<span class="material-symbols-outlined text-[12px] text-success" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span class="font-body-secondary text-[10px] font-bold text-success uppercase tracking-wider">Récolté aujourd'hui</span>
+</div>
+</div>
+<div class="p-sm flex flex-col gap-1 grow">
+<h3 class="font-h3 text-[14px] leading-tight text-text-main line-clamp-2 mt-1">Tomates Grappes Bio</h3>
+<div class="flex items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined text-[14px]">storefront</span>
+<span class="font-body-secondary text-[12px] truncate">Ferme du Soleil</span>
+<span class="material-symbols-outlined text-[14px] text-primary-container" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-between">
+<span class="font-price-display text-[16px] text-text-main font-bold">2.50€ <span class="text-[12px] text-text-muted font-normal">/kg</span></span>
+<button class="w-8 h-8 rounded-full bg-warning text-surface flex items-center justify-center active:scale-90 transition-transform shadow-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-surface rounded-xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 hover:scale-[1.01] flex flex-col border border-surface-container">
+<div class="relative w-full aspect-square">
+<img alt="Carottes" class="w-full h-full object-cover" data-alt="Bundle of fresh vibrant orange carrots with green leafy tops on dark slate surface, dramatic natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB83tBDu37V2BWUook5y3ZsqceCCESgpoBIRyeeltFD0mPKRcBLXvs62GcgltayyiVx5F-TvZucPKXtQE7AgejAH1vd8o8OawV7MaKS8v2yt5ugBaHSaX82h0Ho1C7Ybvq3lqKXfqCpfmXu42e2upJAhx9gRQvWg7qHBKRTi-EvFt2hvYPCGF_5u_n1tf-lRh8ee32FD4VvtwcJuao6_hr9YjrNKrM8TngQ7PzPvFXEIJ0JWQXqlCjhJgpwFL64uewSEOMF4mNECHE"/>
+</div>
+<div class="p-sm flex flex-col gap-1 grow">
+<h3 class="font-h3 text-[14px] leading-tight text-text-main line-clamp-2 mt-1">Carottes Sables Vrac</h3>
+<div class="flex items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined text-[14px]">storefront</span>
+<span class="font-body-secondary text-[12px] truncate">Les Maraîchers</span>
+<span class="material-symbols-outlined text-[14px] text-primary-container" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-between">
+<span class="font-price-display text-[16px] text-text-main font-bold">1.80€ <span class="text-[12px] text-text-muted font-normal">/kg</span></span>
+<button class="w-8 h-8 rounded-full bg-warning text-surface flex items-center justify-center active:scale-90 transition-transform shadow-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-surface rounded-xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 hover:scale-[1.01] flex flex-col border border-surface-container">
+<div class="relative w-full aspect-square">
+<img alt="Pommes" class="w-full h-full object-cover" data-alt="Crisp red apples stacked in a woven wooden basket, soft morning dew, shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpU-XZe8QR6OWVeIz7puElkmOJJOWiOXPfOWN6pz4ydQWV_ELrZgMZSF08wcn-95YQYapzWhBsSZEsh9Uuy0Lbcvu4T8OjKekckJn9BbhP6eTn6W0ky4Ngb33nl-P77Vrz-ni5snx66t3mzZ-198_PrFaITOriPD_ZA6dJLWgnuHft5hTJ1KH697Hq0elVKyzM6Wts-AdNmkzmL74v0JqN0XEllEfz4AUFjwdew5zi360TiXD4cQExLTC-_txLj-evQoG3iJguNIE"/>
+<div class="absolute top-2 left-2 bg-success-light px-2 py-1 rounded-full flex items-center gap-1 shadow-sm backdrop-blur-sm bg-white/80">
+<span class="material-symbols-outlined text-[12px] text-success" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span class="font-body-secondary text-[10px] font-bold text-success uppercase tracking-wider">Récolté hier</span>
+</div>
+</div>
+<div class="p-sm flex flex-col gap-1 grow">
+<h3 class="font-h3 text-[14px] leading-tight text-text-main line-clamp-2 mt-1">Pommes Gala Premium</h3>
+<div class="flex items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined text-[14px]">storefront</span>
+<span class="font-body-secondary text-[12px] truncate">Vergers de l'Ouest</span>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-between">
+<span class="font-price-display text-[16px] text-text-main font-bold">3.20€ <span class="text-[12px] text-text-muted font-normal">/kg</span></span>
+<button class="w-8 h-8 rounded-full bg-warning text-surface flex items-center justify-center active:scale-90 transition-transform shadow-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="bg-surface rounded-xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 hover:scale-[1.01] flex flex-col border border-surface-container">
+<div class="relative w-full aspect-square">
+<img alt="Oeufs" class="w-full h-full object-cover" data-alt="Fresh farm brown eggs arranged in a rustic cardboard carton on rough wooden table, warm natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXBwXjg7LdrnGEzPFWM-PgPkxwNqDIQrdc4t8NA1YJ6ptElfZewWxEzrZJA2wXTnaGhfixlyW1erf2rqEFudd98c7TJMvTgcaTicx8in2410BFa4M8PPZhcxXhBceEQSbdTC1G-mCEYZPzprIp7RXAfzb9jZN_g3Msa5FC698uO_spv6c9RVgDNon6s7tEnPiKTxIqREwz3S06k13qMCwzAJ6QnftMRJMgC_WMGQmZKG8eSN36YvTW9gh3HFaNc8uaOs6da3iBNWU"/>
+</div>
+<div class="p-sm flex flex-col gap-1 grow">
+<h3 class="font-h3 text-[14px] leading-tight text-text-main line-clamp-2 mt-1">Œufs Fermiers Plein Air</h3>
+<div class="flex items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined text-[14px]">storefront</span>
+<span class="font-body-secondary text-[12px] truncate">Coopérative Locale</span>
+<span class="material-symbols-outlined text-[14px] text-primary-container" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-between">
+<span class="font-price-display text-[16px] text-text-main font-bold">4.50€ <span class="text-[12px] text-text-muted font-normal">/dz</span></span>
+<button class="w-8 h-8 rounded-full bg-warning text-surface flex items-center justify-center active:scale-90 transition-transform shadow-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</article>
+</section>
+</main>
+<!-- BottomNavBar (Shared Component) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-safe bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] h-[64px] rounded-t-2xl z-50 md:hidden">
+<!-- Accueil -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#1B6CA8] dark:hover:text-sky-300 transition-all active:scale-90 duration-150 ease-out font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider gap-1" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span>Accueil</span>
+</a>
+<!-- Missions -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#1B6CA8] dark:hover:text-sky-300 transition-all active:scale-90 duration-150 ease-out font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider gap-1" href="#">
+<span class="material-symbols-outlined text-[24px]">assignment</span>
+<span>Missions</span>
+</a>
+<!-- Publier (FAB style subtle center) -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#1B6CA8] dark:hover:text-sky-300 transition-all active:scale-90 duration-150 ease-out font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider gap-1" href="#">
+<span class="material-symbols-outlined text-[24px]">add_circle</span>
+<span>Publier</span>
+</a>
+<!-- Marché (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-[#1B6CA8] dark:text-sky-400 relative after:content-[''] after:absolute after:-bottom-1 after:w-1.5 after:h-1.5 after:bg-[#E8941A] after:rounded-full hover:text-[#1B6CA8] dark:hover:text-sky-300 transition-all active:scale-90 haptic-pulse duration-150 ease-out font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider gap-1" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<span>Marché</span>
+</a>
+<!-- Profil -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#1B6CA8] dark:hover:text-sky-300 transition-all active:scale-90 duration-150 ease-out font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider gap-1" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span>Profil</span>
+</a>
+</nav>
+</body></html>

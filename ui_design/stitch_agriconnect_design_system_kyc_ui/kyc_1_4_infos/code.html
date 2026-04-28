@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Écran KYC - Étape 1/4</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#ffe3c8",
+                      "text-muted": "#7F8C9A",
+                      "surface-container-low": "#f2f3f9",
+                      "secondary-fixed": "#9af6b8",
+                      "background": "#F5F7FA",
+                      "on-primary-fixed-variant": "#004a78",
+                      "on-secondary-fixed": "#00210f",
+                      "surface-tint": "#02629e",
+                      "on-background": "#191c20",
+                      "text-main": "#1A1A2E",
+                      "surface-container-highest": "#e1e2e8",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed": "#ffddba",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#7ed99e",
+                      "primary": "#005387",
+                      "primary-fixed": "#cfe5ff",
+                      "warning-light": "#FEF4E7",
+                      "surface-container": "#eceef3",
+                      "tertiary": "#734600",
+                      "outline": "#717881",
+                      "on-secondary-container": "#047240",
+                      "on-primary-container": "#d9e9ff",
+                      "tertiary-container": "#945b00",
+                      "on-surface": "#191c20",
+                      "primary-container": "#1b6ca8",
+                      "on-secondary": "#ffffff",
+                      "border": "#E0E7EF",
+                      "secondary": "#006d3d",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface-variant": "#414750",
+                      "on-tertiary-fixed": "#2b1700",
+                      "error": "#E74C3C",
+                      "primary-fixed-dim": "#9acbff",
+                      "surface-container-high": "#e6e8ed",
+                      "warning": "#F39C12",
+                      "on-primary-fixed": "#001d34",
+                      "surface-dim": "#d8dadf",
+                      "on-secondary-fixed-variant": "#00522d",
+                      "surface-variant": "#e1e2e8",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb865",
+                      "on-primary": "#ffffff",
+                      "secondary-container": "#97f3b5",
+                      "on-tertiary-fixed-variant": "#673d00",
+                      "success-light": "#EBF7EF",
+                      "surface-bright": "#f8f9ff",
+                      "inverse-on-surface": "#eff0f6",
+                      "outline-variant": "#c0c7d1",
+                      "inverse-primary": "#9acbff",
+                      "on-error-container": "#93000a",
+                      "inverse-surface": "#2e3135",
+                      "success": "#27AE60",
+                      "surface": "#FFFFFF"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "screen-edge": "20px",
+                      "sm": "8px",
+                      "card-gap": "12px",
+                      "lg": "24px",
+                      "xs": "4px",
+                      "section-v": "24px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "2xl": "48px",
+                      "3xl": "64px",
+                      "form-gap": "16px"
+              },
+              "fontFamily": {
+                      "code-mono": [
+                              "monospace"
+                      ],
+                      "body-secondary": [
+                              "Be Vietnam Pro"
+                      ],
+                      "button-label": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-main": [
+                              "Be Vietnam Pro"
+                      ],
+                      "h3": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h2": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h1": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "price-display": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "code-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "1",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-secondary": [
+                              "13px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "button-label": [
+                              "15px",
+                              {
+                                      "lineHeight": "1",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-main": [
+                              "15px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h3": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h2": [
+                              "22px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "letterSpacing": "-0.3px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "h1": [
+                              "28px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.3px",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "price-display": [
+                              "20px",
+                              {
+                                      "lineHeight": "1",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen flex flex-col font-body-main text-text-main">
+<!-- Top Navigation Area (Transactional/Linear flow, no standard app bar, simple back and progress) -->
+<header class="w-full bg-surface sticky top-0 z-50 pt-safe pb-4 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+<div class="px-screen-edge flex items-center justify-between h-16">
+<button aria-label="Retour" class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-low hover:bg-surface-container transition-colors active:scale-95 text-text-main">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="font-body-secondary text-body-secondary text-text-muted">
+                Étape 1 sur 4
+            </div>
+<div class="w-10"></div> <!-- Placeholder for balance -->
+</div>
+<!-- Progress Bar -->
+<div class="px-screen-edge mt-2">
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full transition-all duration-300" style="width: 25%;"></div>
+</div>
+</div>
+</header>
+<main class="flex-grow flex flex-col px-screen-edge pt-lg pb-3xl">
+<div class="mb-lg">
+<h1 class="font-h1 text-h1 text-text-main mb-sm">Votre identité</h1>
+<p class="font-body-secondary text-body-secondary text-text-muted">Veuillez fournir vos informations personnelles telles qu'elles apparaissent sur votre document d'identité officiel.</p>
+</div>
+<form class="flex flex-col gap-form-gap">
+<!-- Full Name -->
+<div class="flex flex-col gap-xs">
+<label class="font-body-secondary text-body-secondary text-on-surface-variant font-medium" for="fullname">Nom complet</label>
+<input class="w-full h-12 px-4 bg-surface border-[1.5px] border-border rounded-lg text-text-main font-body-main text-body-main focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-text-muted" id="fullname" placeholder="Ex: Jean Dupont" type="text"/>
+</div>
+<!-- Date of Birth -->
+<div class="flex flex-col gap-xs">
+<label class="font-body-secondary text-body-secondary text-on-surface-variant font-medium" for="dob">Date de naissance</label>
+<div class="relative">
+<input class="w-full h-12 pl-4 pr-12 bg-surface border-[1.5px] border-border rounded-lg text-text-main font-body-main text-body-main focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-text-muted" id="dob" placeholder="JJ/MM/AAAA" type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none" data-icon="calendar_today">calendar_today</span>
+</div>
+</div>
+<!-- Gender (Radio Group represented as segmented controls for better touch UI) -->
+<div class="flex flex-col gap-xs">
+<span class="font-body-secondary text-body-secondary text-on-surface-variant font-medium">Sexe</span>
+<div class="flex gap-2 bg-surface-container-low p-1 rounded-lg">
+<label class="flex-1 text-center cursor-pointer">
+<input checked="" class="peer sr-only" name="gender" type="radio" value="homme"/>
+<div class="py-2.5 rounded-md font-body-secondary text-body-secondary text-text-muted peer-checked:bg-surface peer-checked:text-text-main peer-checked:shadow-sm peer-checked:font-medium transition-all">Homme</div>
+</label>
+<label class="flex-1 text-center cursor-pointer">
+<input class="peer sr-only" name="gender" type="radio" value="femme"/>
+<div class="py-2.5 rounded-md font-body-secondary text-body-secondary text-text-muted peer-checked:bg-surface peer-checked:text-text-main peer-checked:shadow-sm peer-checked:font-medium transition-all">Femme</div>
+</label>
+<label class="flex-1 text-center cursor-pointer">
+<input class="peer sr-only" name="gender" type="radio" value="autre"/>
+<div class="py-2.5 rounded-md font-body-secondary text-body-secondary text-text-muted peer-checked:bg-surface peer-checked:text-text-main peer-checked:shadow-sm peer-checked:font-medium transition-all">Autre</div>
+</label>
+</div>
+</div>
+<!-- Region / City Dropdown -->
+<div class="flex flex-col gap-xs">
+<label class="font-body-secondary text-body-secondary text-on-surface-variant font-medium" for="region">Région / Ville</label>
+<div class="relative">
+<select class="w-full h-12 pl-4 pr-12 bg-surface border-[1.5px] border-border rounded-lg text-text-main font-body-main text-body-main focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all appearance-none cursor-pointer" id="region">
+<option disabled="" selected="" value="">Sélectionnez votre région</option>
+<option value="dakar">Dakar</option>
+<option value="thies">Thiès</option>
+<option value="saint-louis">Saint-Louis</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Address with Location Icon -->
+<div class="flex flex-col gap-xs">
+<label class="font-body-secondary text-body-secondary text-on-surface-variant font-medium" for="address">Adresse</label>
+<div class="flex gap-2">
+<input class="flex-grow h-12 px-4 bg-surface border-[1.5px] border-border rounded-lg text-text-main font-body-main text-body-main focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-text-muted" id="address" placeholder="Entrez votre adresse complète" type="text"/>
+<button aria-label="Localiser mon adresse" class="w-12 h-12 flex-shrink-0 bg-surface-container-low border-[1.5px] border-border rounded-lg flex items-center justify-center text-primary-container hover:bg-surface-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined" data-icon="my_location">my_location</span>
+</button>
+</div>
+</div>
+</form>
+</main>
+<!-- Bottom Sticky Action Area -->
+<div class="fixed bottom-0 left-0 right-0 p-screen-edge bg-gradient-to-t from-background via-background to-transparent pb-8">
+<button class="w-full h-[52px] bg-primary-container text-on-primary rounded-lg font-button-label text-button-label flex items-center justify-center shadow-[0_4px_12px_rgba(27,108,168,0.2)] active:scale-[0.97] transition-transform duration-150 relative overflow-hidden">
+            Continuer
+            <!-- subtle gradient overlay for tactile feel -->
+<div class="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
+</button>
+</div>
+</body></html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Publier une offre - Étape 3</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#02629e",
+                        "on-primary-fixed": "#001d34",
+                        "tertiary-fixed-dim": "#ffb865",
+                        "primary-fixed": "#cfe5ff",
+                        "tertiary": "#734600",
+                        "success-light": "#EBF7EF",
+                        "on-primary-fixed-variant": "#004a78",
+                        "secondary": "#006d3d",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#945b00",
+                        "on-tertiary-container": "#ffe3c8",
+                        "text-main": "#1A1A2E",
+                        "surface-container-low": "#f2f3f9",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d8dadf",
+                        "error": "#E74C3C",
+                        "background": "#F5F7FA",
+                        "tertiary-fixed": "#ffddba",
+                        "surface-container": "#eceef3",
+                        "inverse-on-surface": "#eff0f6",
+                        "primary-fixed-dim": "#9acbff",
+                        "on-background": "#191c20",
+                        "text-muted": "#7F8C9A",
+                        "secondary-fixed": "#9af6b8",
+                        "secondary-container": "#97f3b5",
+                        "warning-light": "#FEF4E7",
+                        "surface": "#FFFFFF",
+                        "inverse-surface": "#2e3135",
+                        "outline": "#717881",
+                        "on-primary-container": "#d9e9ff",
+                        "on-tertiary-fixed": "#2b1700",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#414750",
+                        "on-secondary-fixed": "#00210f",
+                        "border": "#E0E7EF",
+                        "on-error-container": "#93000a",
+                        "success": "#27AE60",
+                        "primary": "#005387",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#7ed99e",
+                        "primary-container": "#1b6ca8",
+                        "on-surface": "#191c20",
+                        "inverse-primary": "#9acbff",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-container": "#047240",
+                        "on-tertiary-fixed-variant": "#673d00",
+                        "surface-container-highest": "#e1e2e8",
+                        "warning": "#F39C12",
+                        "surface-variant": "#e1e2e8",
+                        "outline-variant": "#c0c7d1",
+                        "on-secondary-fixed-variant": "#00522d",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e6e8ed"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "3xl": "64px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "card-gap": "12px",
+                        "form-gap": "16px",
+                        "2xl": "48px",
+                        "screen-edge": "20px",
+                        "md": "16px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "section-v": "24px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Plus Jakarta Sans"],
+                        "code-mono": ["monospace"],
+                        "button-label": ["Be Vietnam Pro"],
+                        "body-secondary": ["Be Vietnam Pro"],
+                        "body-main": ["Be Vietnam Pro"],
+                        "price-display": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "h3": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "code-mono": ["13px", { "lineHeight": "1", "fontWeight": "400" }],
+                        "button-label": ["15px", { "lineHeight": "1", "fontWeight": "700" }],
+                        "body-secondary": ["13px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-main": ["15px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "price-display": ["20px", { "lineHeight": "1", "fontWeight": "700" }],
+                        "h2": ["22px", { "lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "700" }],
+                        "h1": ["28px", { "lineHeight": "1.2", "letterSpacing": "-0.3px", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased min-h-screen pb-[140px]">
+<!-- TopAppBar from JSON -->
+<header class="fixed top-0 w-full z-50 h-16 bg-[#F5F7FA] dark:bg-slate-900 border-b border-[#E0E7EF] dark:border-slate-800 flex items-center justify-between px-5 w-full">
+<!-- Leading Avatar -->
+<div class="flex items-center gap-3">
+<div class="relative w-9 h-9 rounded-full bg-success-light border-2 border-success overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-success" style="font-variation-settings: 'FILL' 1;">person</span>
+<div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-success rounded-full border border-white"></div>
+</div>
+<span class="text-lg font-black text-[#1B6CA8] dark:text-blue-400 font-['Plus_Jakarta_Sans'] font-semibold">AgriConnect Main-d'œuvre</span>
+</div>
+<!-- Trailing Icon -->
+<button class="text-[#1B6CA8] dark:text-blue-400 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="pt-[80px] px-screen-edge max-w-2xl mx-auto flex flex-col gap-section-v">
+<!-- Progress Header -->
+<div class="flex flex-col gap-sm">
+<div class="flex items-center justify-between">
+<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-h2 text-h2 text-on-surface">Récapitulatif</h1>
+<div class="w-10"></div> <!-- Spacer for center alignment -->
+</div>
+<div class="flex items-center gap-2 mt-md">
+<div class="h-1.5 flex-1 bg-success rounded-full"></div>
+<div class="h-1.5 flex-1 bg-success rounded-full"></div>
+<div class="h-1.5 flex-1 bg-primary rounded-full relative"></div>
+</div>
+<div class="flex justify-between font-body-secondary text-body-secondary text-text-muted mt-1">
+<span>Détails</span>
+<span>Exigences</span>
+<span class="text-primary font-bold">Publication</span>
+</div>
+</div>
+<!-- Section 1: Aperçu Carte -->
+<section class="flex flex-col gap-card-gap">
+<h2 class="font-h3 text-h3 text-on-surface">Aperçu de l'offre</h2>
+<div class="bg-surface rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-border overflow-hidden">
+<div class="h-[120px] bg-surface-container w-full relative">
+<img alt="Champ agricole au lever du soleil" class="w-full h-full object-cover" data-alt="wide shot of a vibrant green agricultural field at sunrise with soft golden light and clear sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADB5_Vujj7K_mTtjEF14P4qobQwscHlhQtlfIDZ9iydzX7dO2kDEX8Q5tr5_SadOi32NQtqzC11ZzJPx8Y1QSRKLuat1kUYnIWN_D4OelxRBobYkquFRKPtBpY0wDGLc8HtsGbsOVsYiGcPCyu3v2vwRK05ZP80CQxBKJynycfOZFlV1qHXTMDDo9PWN5sG92UHde6lB32P3AILiAzG1enS4DspHUnv0YqQNzfjRCxiUV9AzgH9TZ49OXasRX_1ZIKtJA3FOdEz2s"/>
+<div class="absolute top-md left-md bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full border border-border/50">
+<span class="font-button-label text-button-label text-primary-container text-[12px]">Récolte fruitière</span>
+</div>
+</div>
+<div class="p-md flex flex-col gap-md">
+<div>
+<h3 class="font-h2 text-h2 text-on-surface">Cueillette de Pommes - Saison 2024</h3>
+<p class="font-body-main text-body-main text-text-muted mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                            Verger des Collines, 84000 Avignon
+                        </p>
+</div>
+<div class="grid grid-cols-2 gap-card-gap bg-background rounded-lg p-3 border border-border">
+<div class="flex flex-col gap-1">
+<span class="font-body-secondary text-body-secondary text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_month</span> Période
+                            </span>
+<span class="font-body-main text-body-main text-on-surface font-semibold">15 Sep - 30 Sep</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-body-secondary text-body-secondary text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">group</span> Équipe
+                            </span>
+<span class="font-body-main text-body-main text-on-surface font-semibold">8 personnes</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-success-light flex items-center justify-center">
+<span class="material-symbols-outlined text-success text-[18px]">payments</span>
+</div>
+<div class="flex flex-col">
+<span class="font-price-display text-price-display text-text-main">85€ <span class="font-body-secondary text-body-secondary text-text-muted font-normal">/ jour</span></span>
+</div>
+</div>
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1.5 rounded-full font-button-label text-[12px]">Hébergement inclus</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Paramètres -->
+<section class="bg-surface rounded-xl p-md shadow-[0_2px_8px_rgba(0,0,0,0.02)] border border-border flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-main text-body-main text-on-surface font-semibold">Publier immédiatement</span>
+<span class="font-body-secondary text-body-secondary text-text-muted">L'offre sera visible par tous les candidats.</span>
+</div>
+<!-- Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-dim peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-success"></div>
+</label>
+</section>
+<!-- Section 3: Coût Prévisionnel -->
+<section class="flex flex-col gap-card-gap">
+<h2 class="font-h3 text-h3 text-on-surface">Coût prévisionnel</h2>
+<div class="bg-surface-container-low rounded-xl p-md border border-border">
+<div class="flex items-start gap-3 mb-md pb-md border-b border-border/50">
+<span class="material-symbols-outlined text-primary mt-1">account_balance_wallet</span>
+<div>
+<h4 class="font-body-main text-body-main text-on-surface font-semibold">Séquestre des salaires</h4>
+<p class="font-body-secondary text-body-secondary text-text-muted mt-1">Les fonds sont bloqués de manière sécurisée et libérés après validation des journées travaillées.</p>
+</div>
+</div>
+<div class="flex flex-col gap-3 font-code-mono text-code-mono text-on-surface-variant">
+<div class="flex justify-between">
+<span>8 travailleurs × 15 jours × 85€</span>
+<span>10 200,00 €</span>
+</div>
+<div class="flex justify-between text-text-muted">
+<span>Frais de service AgriConnect (3%)</span>
+<span>306,00 €</span>
+</div>
+</div>
+<div class="mt-md pt-md border-t border-border flex justify-between items-end">
+<span class="font-body-main text-body-main text-on-surface font-bold">Total à bloquer</span>
+<span class="font-price-display text-price-display text-primary text-[24px]">10 506,00 €</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Action Area -->
+<div class="fixed bottom-0 left-0 w-full bg-surface px-screen-edge py-md border-t border-border shadow-[0_-4px_16px_rgba(0,0,0,0.05)] z-40 flex flex-col gap-md">
+<label class="flex items-start gap-3 cursor-pointer group">
+<div class="relative flex items-center justify-center mt-1">
+<input class="peer h-5 w-5 cursor-pointer appearance-none rounded border border-outline checked:border-success checked:bg-success transition-all" type="checkbox"/>
+<span class="material-symbols-outlined absolute text-white opacity-0 peer-checked:opacity-100 pointer-events-none text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-body-secondary text-body-secondary text-text-muted flex-1">
+                J'accepte les <a class="text-primary underline" href="#">Conditions Générales d'Utilisation</a> et je confirme bloquer le montant prévisionnel sur le compte séquestre.
+            </span>
+</label>
+<button class="w-full h-[52px] bg-success hover:opacity-90 active:scale-[0.98] transition-all text-white rounded-lg flex items-center justify-center gap-2 font-button-label text-button-label shadow-sm">
+<span class="material-symbols-outlined">check_circle</span>
+            Publier l'offre
+        </button>
+</div>
+</body></html>

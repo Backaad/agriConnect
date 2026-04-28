@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgriConnect - Choix du Rôle</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#ffe3c8",
+                        "text-muted": "#7F8C9A",
+                        "surface-container-low": "#f2f3f9",
+                        "secondary-fixed": "#9af6b8",
+                        "background": "#F5F7FA",
+                        "on-primary-fixed-variant": "#004a78",
+                        "on-secondary-fixed": "#00210f",
+                        "surface-tint": "#02629e",
+                        "on-background": "#191c20",
+                        "text-main": "#1A1A2E",
+                        "surface-container-highest": "#e1e2e8",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffddba",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#7ed99e",
+                        "primary": "#005387",
+                        "primary-fixed": "#cfe5ff",
+                        "warning-light": "#FEF4E7",
+                        "surface-container": "#eceef3",
+                        "tertiary": "#734600",
+                        "outline": "#717881",
+                        "on-secondary-container": "#047240",
+                        "on-primary-container": "#d9e9ff",
+                        "tertiary-container": "#945b00",
+                        "on-surface": "#191c20",
+                        "primary-container": "#1b6ca8",
+                        "on-secondary": "#ffffff",
+                        "border": "#E0E7EF",
+                        "secondary": "#006d3d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#414750",
+                        "on-tertiary-fixed": "#2b1700",
+                        "error": "#E74C3C",
+                        "primary-fixed-dim": "#9acbff",
+                        "surface-container-high": "#e6e8ed",
+                        "warning": "#F39C12",
+                        "on-primary-fixed": "#001d34",
+                        "surface-dim": "#d8dadf",
+                        "on-secondary-fixed-variant": "#00522d",
+                        "surface-variant": "#e1e2e8",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb865",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#97f3b5",
+                        "on-tertiary-fixed-variant": "#673d00",
+                        "success-light": "#EBF7EF",
+                        "surface-bright": "#f8f9ff",
+                        "inverse-on-surface": "#eff0f6",
+                        "outline-variant": "#c0c7d1",
+                        "inverse-primary": "#9acbff",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2e3135",
+                        "success": "#27AE60",
+                        "surface": "#FFFFFF"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "screen-edge": "20px",
+                        "sm": "8px",
+                        "card-gap": "12px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "section-v": "24px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "2xl": "48px",
+                        "3xl": "64px",
+                        "form-gap": "16px"
+                    },
+                    "fontFamily": {
+                        "code-mono": ["monospace"],
+                        "body-secondary": ["Be Vietnam Pro"],
+                        "button-label": ["Be Vietnam Pro"],
+                        "body-main": ["Be Vietnam Pro"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "price-display": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "code-mono": ["13px", {"lineHeight": "1", "fontWeight": "400"}],
+                        "body-secondary": ["13px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "button-label": ["15px", {"lineHeight": "1", "fontWeight": "700"}],
+                        "body-main": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h3": ["18px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h2": ["22px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "700"}],
+                        "h1": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.3px", "fontWeight": "800"}],
+                        "price-display": ["20px", {"lineHeight": "1", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen font-body-main text-text-main flex flex-col antialiased">
+<!-- Main Content Area -->
+<main class="flex-1 px-screen-edge py-xl flex flex-col max-w-md mx-auto w-full">
+<!-- Header Section -->
+<header class="text-center mb-xl">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-primary-container text-on-primary mb-lg shadow-[0_4px_12px_rgba(27,108,168,0.2)]">
+<span class="material-symbols-outlined text-[32px]">agriculture</span>
+</div>
+<h1 class="font-h1 text-h1 text-text-main mb-sm">Bienvenue sur AgriConnect</h1>
+<p class="font-body-main text-body-main text-text-muted">Comment allez-vous utiliser l'app ?</p>
+</header>
+<!-- Role Selection Cards -->
+<div class="flex flex-col gap-card-gap mb-xl flex-1">
+<!-- Card 1: Agriculteur (Selected) -->
+<button class="flex items-start text-left p-md bg-surface rounded-xl border-2 border-primary-container shadow-[0_8px_24px_rgba(27,108,168,0.1)] relative overflow-hidden transition-all duration-200 scale-[1.01]">
+<div class="absolute top-0 right-0 w-0 h-0 border-t-[40px] border-l-[40px] border-t-primary-container border-l-transparent">
+<span class="material-symbols-outlined absolute -top-[36px] -left-[18px] text-on-primary text-[18px] icon-fill">check</span>
+</div>
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-primary-container/10 text-primary-container flex items-center justify-center mr-md">
+<span class="material-symbols-outlined text-[24px]">grass</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-text-main mb-xs">Agriculteur / Producteur</h3>
+<p class="font-body-secondary text-body-secondary text-text-muted">Je cherche de la main-d'oeuvre et/ou je vends mes récoltes</p>
+</div>
+</button>
+<!-- Card 2: Travailleur agricole -->
+<button class="flex items-start text-left p-md bg-surface rounded-xl border border-border shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:border-outline-variant hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] transition-all duration-200 active:scale-[0.98]">
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-surface-container text-text-muted flex items-center justify-center mr-md">
+<span class="material-symbols-outlined text-[24px]">front_hand</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-text-main mb-xs">Travailleur agricole</h3>
+<p class="font-body-secondary text-body-secondary text-text-muted">Je cherche des missions agricoles près de chez moi</p>
+</div>
+</button>
+<!-- Card 3: Consommateur -->
+<button class="flex items-start text-left p-md bg-surface rounded-xl border border-border shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:border-outline-variant hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] transition-all duration-200 active:scale-[0.98]">
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-surface-container text-text-muted flex items-center justify-center mr-md">
+<span class="material-symbols-outlined text-[24px]">shopping_cart</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-text-main mb-xs">Consommateur</h3>
+<p class="font-body-secondary text-body-secondary text-text-muted">J'achète des produits frais directement aux producteurs</p>
+</div>
+</button>
+</div>
+<!-- Sticky Bottom Action -->
+<div class="mt-auto pt-lg">
+<button class="w-full h-[52px] bg-primary-container text-on-primary font-button-label text-button-label rounded-lg shadow-[0_4px_12px_rgba(27,108,168,0.2)] hover:bg-primary-container/90 active:scale-[0.97] transition-all duration-150 flex items-center justify-center gap-sm">
+                Continuer
+                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</main>
+</body></html>
