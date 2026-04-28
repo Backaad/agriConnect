@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nouveau produit - AgriConnect</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-background": "#191c20",
+                      "tertiary-fixed-dim": "#ffb865",
+                      "on-tertiary-container": "#ffe3c8",
+                      "surface-variant": "#e1e2e8",
+                      "primary-container": "#1b6ca8",
+                      "inverse-surface": "#2e3135",
+                      "on-surface": "#191c20",
+                      "on-secondary-fixed": "#00210f",
+                      "background": "#F5F7FA",
+                      "surface-container-low": "#f2f3f9",
+                      "error": "#E74C3C",
+                      "surface-container-highest": "#e1e2e8",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#FFFFFF",
+                      "surface-container": "#eceef3",
+                      "on-secondary-fixed-variant": "#00522d",
+                      "error-container": "#ffdad6",
+                      "text-main": "#1A1A2E",
+                      "surface-container-high": "#e6e8ed",
+                      "secondary": "#006d3d",
+                      "on-primary-fixed": "#001d34",
+                      "primary-fixed": "#cfe5ff",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed": "#9af6b8",
+                      "tertiary-fixed": "#ffddba",
+                      "success": "#27AE60",
+                      "secondary-container": "#97f3b5",
+                      "surface-dim": "#d8dadf",
+                      "border": "#E0E7EF",
+                      "on-tertiary-fixed-variant": "#673d00",
+                      "on-tertiary-fixed": "#2b1700",
+                      "on-error": "#ffffff",
+                      "secondary-fixed-dim": "#7ed99e",
+                      "success-light": "#EBF7EF",
+                      "on-surface-variant": "#414750",
+                      "inverse-on-surface": "#eff0f6",
+                      "tertiary-container": "#945b00",
+                      "outline": "#717881",
+                      "primary-fixed-dim": "#9acbff",
+                      "text-muted": "#7F8C9A",
+                      "surface-container-lowest": "#ffffff",
+                      "outline-variant": "#c0c7d1",
+                      "on-primary-container": "#d9e9ff",
+                      "on-secondary-container": "#047240",
+                      "on-primary-fixed-variant": "#004a78",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#9acbff",
+                      "primary": "#005387",
+                      "tertiary": "#734600",
+                      "warning": "#F39C12",
+                      "surface-bright": "#f8f9ff",
+                      "surface-tint": "#02629e",
+                      "warning-light": "#FEF4E7",
+                      "on-error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "base": "4px",
+                      "screen-edge": "20px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "card-gap": "12px",
+                      "section-v": "24px",
+                      "2xl": "48px",
+                      "sm": "8px",
+                      "form-gap": "16px",
+                      "3xl": "64px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "h3": ["Plus Jakarta Sans"],
+                      "body-secondary": ["Be Vietnam Pro"],
+                      "price-display": ["Plus Jakarta Sans"],
+                      "button-label": ["Be Vietnam Pro"],
+                      "h1": ["Plus Jakarta Sans"],
+                      "body-main": ["Be Vietnam Pro"],
+                      "code-mono": ["monospace"],
+                      "h2": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "h3": ["18px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "body-secondary": ["13px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "price-display": ["20px", {"lineHeight": "1", "fontWeight": "700"}],
+                      "button-label": ["15px", {"lineHeight": "1", "fontWeight": "700"}],
+                      "h1": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.3px", "fontWeight": "800"}],
+                      "body-main": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "code-mono": ["13px", {"lineHeight": "1", "fontWeight": "400"}],
+                      "h2": ["22px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Custom Toggle Switch Styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #27AE60; /* success color */
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #27AE60; /* success color */
+        }
+        .toggle-checkbox {
+            right: 0;
+            z-index: 1;
+            border-color: #E0E7EF;
+            transition: all 0.3s;
+        }
+        .toggle-label {
+            width: 44px;
+            height: 24px;
+            background-color: #d8dadf;
+            border-radius: 9999px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .toggle-label::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .toggle-checkbox:checked + .toggle-label::after {
+            transform: translateX(20px);
+        }
+
+        /* Select styling */
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+            background-repeat: no-repeat;
+            background-position-x: 95%;
+            background-position-y: 50%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-main antialiased pb-[100px]">
+<!-- Top Navigation (Transactional View) -->
+<header class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-sm border-b border-border h-16 flex items-center px-screen-edge">
+<button class="mr-md text-text-main active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="font-h2 text-h2 text-on-surface flex-1 text-center pr-[32px]">Nouveau produit</h1>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[88px] px-screen-edge max-w-2xl mx-auto">
+<!-- Photo Zone -->
+<section class="mb-section-v bg-surface p-card-gap rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-border/50">
+<div class="flex flex-col gap-sm">
+<!-- Large Placeholder 16:9 -->
+<button class="w-full aspect-video bg-surface-container-low border-2 border-dashed border-outline-variant rounded-lg flex flex-col items-center justify-center text-text-muted hover:bg-surface-container transition-colors active:scale-[0.99]">
+<span class="material-symbols-outlined text-[32px] mb-xs">add_a_photo</span>
+<span class="font-body-secondary text-body-secondary">Ajouter des photos</span>
+</button>
+<!-- Thumbnails Row -->
+<div class="flex gap-sm">
+<button class="w-[80px] aspect-square bg-surface-container-low border border-dashed border-outline-variant rounded flex items-center justify-center text-text-muted hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-xl">image</span>
+</button>
+<button class="w-[80px] aspect-square bg-surface-container-low border border-dashed border-outline-variant rounded flex items-center justify-center text-text-muted hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-xl">image</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Product Information Form -->
+<section class="mb-section-v bg-surface p-card-gap rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-border/50 space-y-form-gap">
+<!-- Nom du produit -->
+<div>
+<label class="block font-body-secondary text-body-secondary text-on-surface-variant mb-xs">Nom du produit</label>
+<input class="w-full bg-surface border border-border rounded-lg px-md py-[14px] font-body-main text-body-main text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors placeholder:text-outline-variant" placeholder="Ex: Tomates, Maïs, Poulet..." type="text"/>
+</div>
+<!-- Catégorie (Grid d'icônes) -->
+<div>
+<label class="block font-body-secondary text-body-secondary text-on-surface-variant mb-xs">Catégorie</label>
+<div class="flex flex-wrap gap-sm">
+<button class="px-md py-2 rounded-full border border-primary bg-primary text-on-primary font-body-secondary text-body-secondary flex items-center gap-xs shadow-[0_2px_4px_rgba(0,83,135,0.2)]">
+<span class="material-symbols-outlined text-[18px]">nutrition</span> Légumes
+                    </button>
+<button class="px-md py-2 rounded-full border border-border bg-surface text-on-surface-variant hover:bg-surface-container-low font-body-secondary text-body-secondary flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">eco</span> Fruits
+                    </button>
+<button class="px-md py-2 rounded-full border border-border bg-surface text-on-surface-variant hover:bg-surface-container-low font-body-secondary text-body-secondary flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">agriculture</span> Céréales
+                    </button>
+<button class="px-md py-2 rounded-full border border-border bg-surface text-on-surface-variant hover:bg-surface-container-low font-body-secondary text-body-secondary flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">pets</span> Élevage
+                    </button>
+</div>
+</div>
+<!-- Prix & Unité -->
+<div class="flex gap-form-gap">
+<div class="flex-1">
+<label class="block font-body-secondary text-body-secondary text-on-surface-variant mb-xs">Prix (FCFA)</label>
+<input class="w-full bg-surface border border-border rounded-lg px-md py-[14px] font-price-display text-price-display text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors placeholder:text-outline-variant" placeholder="0" type="number"/>
+</div>
+<div class="w-[120px]">
+<label class="block font-body-secondary text-body-secondary text-on-surface-variant mb-xs">Unité</label>
+<div class="relative">
+<select class="w-full bg-surface border border-border rounded-lg px-md py-[14px] font-body-main text-body-main text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors appearance-none pr-8">
+<option>Le Kg</option>
+<option>La pièce</option>
+<option>Le sac</option>
+<option>La botte</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Quantité & Date de récolte -->
+<div class="flex gap-form-gap">
+<div class="flex-1">
+<label class="block font-body-secondary text-body-secondary text-on-surface-variant mb-xs">Quantité dispo.</label>
+<input class="w-full bg-surface border border-border rounded-lg px-md py-[14px] font-body-main text-body-main text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors placeholder:text-outline-variant" placeholder="Ex: 50" type="number"/>
+</div>
+<div class="flex-1">
+<label class="block font-body-secondary text-body-secondary text-on-surface-variant mb-xs">Date de récolte</label>
+<input class="w-full bg-surface border border-border rounded-lg px-md py-[14px] font-body-main text-body-main text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors text-sm" type="date"/>
+</div>
+</div>
+</section>
+<!-- Description & Details -->
+<section class="mb-section-v bg-surface p-card-gap rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-border/50 space-y-form-gap">
+<!-- Description courte -->
+<div>
+<div class="flex justify-between items-end mb-xs">
+<label class="block font-body-secondary text-body-secondary text-on-surface-variant">Description courte</label>
+<span class="font-code-mono text-code-mono text-text-muted">0/200</span>
+</div>
+<textarea class="w-full bg-surface border border-border rounded-lg px-md py-[14px] font-body-main text-body-main text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors placeholder:text-outline-variant resize-none" placeholder="Décrivez la qualité, l'aspect de votre produit..." rows="3"></textarea>
+</div>
+<!-- Origine -->
+<div>
+<label class="block font-body-secondary text-body-secondary text-on-surface-variant mb-xs">Origine / Localisation</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">location_on</span>
+<input class="w-full bg-surface border border-border rounded-lg pl-[44px] pr-md py-[14px] font-body-main text-body-main text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors placeholder:text-outline-variant" placeholder="Ville ou région" type="text"/>
+</div>
+</div>
+</section>
+<!-- Options de Livraison -->
+<section class="mb-section-v bg-surface p-card-gap rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-border/50 space-y-form-gap">
+<!-- Toggle: Livraison -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-h3 text-h3 text-on-surface">Je peux livrer</span>
+<span class="font-body-secondary text-body-secondary text-text-muted">Proposer la livraison à l'acheteur</span>
+</div>
+<div class="relative inline-block w-11 mr-2 align-middle select-none">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer opacity-0" id="toggle_delivery" name="toggle_delivery" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-dim cursor-pointer" for="toggle_delivery"></label>
+</div>
+</div>
+<hr class="border-border"/>
+<!-- Toggle: Enlèvement -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-h3 text-h3 text-on-surface">Enlèvement à la ferme</span>
+<span class="font-body-secondary text-body-secondary text-text-muted">L'acheteur vient récupérer sur place</span>
+</div>
+<div class="relative inline-block w-11 mr-2 align-middle select-none">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer opacity-0" id="toggle_pickup" name="toggle_pickup" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-success cursor-pointer" for="toggle_pickup"></label>
+</div>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Action Area -->
+<div class="fixed bottom-0 left-0 w-full bg-surface border-t border-border p-screen-edge pb-safe z-40 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] max-w-2xl mx-auto right-0">
+<button class="w-full h-[52px] bg-success text-on-error rounded-full font-button-label text-button-label flex items-center justify-center gap-sm active:scale-[0.97] transition-transform shadow-[0_4px_10px_rgba(39,174,96,0.3)]">
+<span class="material-symbols-outlined text-[20px]">publish</span>
+            Publier le produit
+        </button>
+</div>
+</body></html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contrat Numérique — Signature</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#02629e",
+                        "on-primary-fixed": "#001d34",
+                        "tertiary-fixed-dim": "#ffb865",
+                        "primary-fixed": "#cfe5ff",
+                        "tertiary": "#734600",
+                        "success-light": "#EBF7EF",
+                        "on-primary-fixed-variant": "#004a78",
+                        "secondary": "#006d3d",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#945b00",
+                        "on-tertiary-container": "#ffe3c8",
+                        "text-main": "#1A1A2E",
+                        "surface-container-low": "#f2f3f9",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d8dadf",
+                        "error": "#E74C3C",
+                        "background": "#F5F7FA",
+                        "tertiary-fixed": "#ffddba",
+                        "surface-container": "#eceef3",
+                        "inverse-on-surface": "#eff0f6",
+                        "primary-fixed-dim": "#9acbff",
+                        "on-background": "#191c20",
+                        "text-muted": "#7F8C9A",
+                        "secondary-fixed": "#9af6b8",
+                        "secondary-container": "#97f3b5",
+                        "warning-light": "#FEF4E7",
+                        "surface": "#FFFFFF",
+                        "inverse-surface": "#2e3135",
+                        "outline": "#717881",
+                        "on-primary-container": "#d9e9ff",
+                        "on-tertiary-fixed": "#2b1700",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#414750",
+                        "on-secondary-fixed": "#00210f",
+                        "border": "#E0E7EF",
+                        "on-error-container": "#93000a",
+                        "success": "#27AE60",
+                        "primary": "#005387",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#7ed99e",
+                        "primary-container": "#1b6ca8",
+                        "on-surface": "#191c20",
+                        "inverse-primary": "#9acbff",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-container": "#047240",
+                        "on-tertiary-fixed-variant": "#673d00",
+                        "surface-container-highest": "#e1e2e8",
+                        "warning": "#F39C12",
+                        "surface-variant": "#e1e2e8",
+                        "outline-variant": "#c0c7d1",
+                        "on-secondary-fixed-variant": "#00522d",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e6e8ed"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "3xl": "64px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "card-gap": "12px",
+                        "form-gap": "16px",
+                        "2xl": "48px",
+                        "screen-edge": "20px",
+                        "md": "16px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "section-v": "24px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Plus Jakarta Sans"],
+                        "code-mono": ["monospace"],
+                        "button-label": ["Be Vietnam Pro"],
+                        "body-secondary": ["Be Vietnam Pro"],
+                        "body-main": ["Be Vietnam Pro"],
+                        "price-display": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "h3": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "code-mono": ["13px", { "lineHeight": "1", "fontWeight": "400" }],
+                        "button-label": ["15px", { "lineHeight": "1", "fontWeight": "700" }],
+                        "body-secondary": ["13px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-main": ["15px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "price-display": ["20px", { "lineHeight": "1", "fontWeight": "700" }],
+                        "h2": ["22px", { "lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "700" }],
+                        "h1": ["28px", { "lineHeight": "1.2", "letterSpacing": "-0.3px", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #F5F7FA; }
+        /* Simulating the signature pad drawing path for visual demo */
+        .signature-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 2s ease forwards;
+            animation-delay: 1s;
+        }
+        @keyframes draw {
+            to { stroke-dashoffset: 0; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar (From JSON) -->
+<nav class="fixed top-0 w-full z-50 h-16 bg-[#F5F7FA] dark:bg-slate-900 border-b border-[#E0E7EF] dark:border-slate-800 flex items-center justify-between px-5">
+<div class="flex items-center gap-3">
+<button aria-label="Retour" class="text-slate-500 hover:opacity-80 transition-opacity active:scale-95 flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-low">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="text-lg font-black text-[#1B6CA8] dark:text-blue-400 font-['Plus_Jakarta_Sans'] font-semibold">AgriConnect Main-d'œuvre</div>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="Notifications" class="text-[#1B6CA8] dark:text-blue-400 hover:opacity-80 transition-opacity active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-button-label text-xs shadow-sm overflow-hidden">
+<img alt="Profil de l'agriculteur avec badge de vérification" class="w-full h-full object-cover" data-alt="Portrait d'un homme souriant dans un champ agricole, éclairage naturel doux" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPnc3xqcYCRLSNpxvqUJJ7mncBEZkx9gV08pTsXnkWO8-WrQO6G2Q4QjUkpZ3apht1o_quxXyoIcfjB3yOVlaQ98Si1h_vp9kV2fYVWd5wG8sL7_g0_KpHpLmBrTUDcv44ePvuv6iaItwls4IJG2ueVn7ZtrFLXsQ_ufPEqP5PkFpzhPAkQGzHB35XiUtwGTxC8_5g-VUJZW1eb8gcnaOlNlN8T5Pi7td9XIvh_uOzyUYhtK2DYpl6Pdtb5dhEjFs3LWde037I1t4"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-[88px] pb-[100px] px-screen-edge max-w-2xl mx-auto flex flex-col gap-section-v">
+<!-- Header -->
+<header class="flex flex-col gap-2 mb-2">
+<div class="inline-flex items-center gap-1.5 text-success bg-success-light px-3 py-1 rounded-full w-fit">
+<span class="material-symbols-outlined text-[16px]" data-weight="fill">lock</span>
+<span class="font-button-label text-code-mono">Environnement Sécurisé</span>
+</div>
+<h1 class="font-h1 text-h1 text-on-surface">Contrat de mission agricole</h1>
+<p class="font-body-main text-body-main text-on-surface-variant">Veuillez examiner attentivement le résumé du contrat avant de procéder à la signature électronique.</p>
+</header>
+<!-- Contrat Summary (Bento Layout) -->
+<section class="bg-surface rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-border p-lg flex flex-col gap-form-gap">
+<!-- Parties Impliquées -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-card-gap pb-md border-b border-border">
+<div class="flex items-start gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container border border-border flex-shrink-0 relative">
+<img alt="Employeur agricole" class="w-full h-full object-cover" data-alt="Vue aérienne d'une ferme moderne avec champs verdoyants" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIRgbqC3PtbKXIScTCJk8o5OLUCclBpppogSi4xeBawaX-tZal1FTPcQ8ULza2v5JWczmPmFqM-bX8M2XJv7A03bapCBgDjq7zlf9GNTvYDpWJdgH9sXe0iMkoClkSyHEkqtSpZJtOSW6F7MlHnJVaJZMsmJ-SL3LINcdbbEEJJXY-lKi4mRnxrO33LV6DAHIMBSaHgDYvcvQA13v_uaOjkvTzTwRRGIOWi40Yn1zvaGlXsSZt7wVOeoKROQkjOY5PxYaQr4n1g3Y"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-success rounded-full border-2 border-surface flex items-center justify-center"></div>
+</div>
+<div>
+<p class="font-body-secondary text-body-secondary text-on-surface-variant">Employeur</p>
+<p class="font-h3 text-h3 text-on-surface flex items-center gap-1">
+                            EARL Les Blés d'Or
+                            <span class="material-symbols-outlined text-success text-[16px]" data-weight="fill" title="Vérifié">verified</span>
+</p>
+<p class="font-body-secondary text-code-mono text-outline mt-0.5">SIRET: 482 910...</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-primary flex items-center justify-center font-h2 text-h2 flex-shrink-0 relative">
+                        M
+                        <div class="absolute bottom-0 right-0 w-4 h-4 bg-success rounded-full border-2 border-surface flex items-center justify-center"></div>
+</div>
+<div>
+<p class="font-body-secondary text-body-secondary text-on-surface-variant">Salarié</p>
+<p class="font-h3 text-h3 text-on-surface flex items-center gap-1">
+                            Moussa Traoré
+                            <span class="material-symbols-outlined text-success text-[16px]" data-weight="fill" title="Vérifié">verified</span>
+</p>
+<p class="font-body-secondary text-code-mono text-outline mt-0.5">ID: #9284-A</p>
+</div>
+</div>
+</div>
+<!-- Détails Mission -->
+<div class="grid grid-cols-2 gap-y-4 gap-x-2 pb-md border-b border-border">
+<div class="col-span-2 sm:col-span-1">
+<p class="font-body-secondary text-body-secondary text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">work</span> Mission
+                    </p>
+<p class="font-body-main text-body-main text-on-surface font-semibold mt-1">Saisonnier - Récolte de pommes</p>
+</div>
+<div class="col-span-2 sm:col-span-1">
+<p class="font-body-secondary text-body-secondary text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> Lieu
+                    </p>
+<p class="font-body-main text-body-main text-on-surface mt-1">Verger Sud, Parcelle B (45 km)</p>
+</div>
+<div class="col-span-1">
+<p class="font-body-secondary text-body-secondary text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span> Dates
+                    </p>
+<p class="font-body-main text-body-main text-on-surface mt-1">12 Oct - 25 Oct 2023</p>
+</div>
+<div class="col-span-1">
+<p class="font-body-secondary text-body-secondary text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Volume
+                    </p>
+<p class="font-body-main text-body-main text-on-surface mt-1">35h / semaine</p>
+</div>
+</div>
+<!-- Rémunération -->
+<div class="bg-surface-container-low rounded-lg p-md flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+<div>
+<p class="font-body-main text-body-main font-semibold text-on-surface">Rémunération totale estimée</p>
+<p class="font-body-secondary text-body-secondary text-on-surface-variant mt-0.5">Taux horaire: 11.52€ brut</p>
+</div>
+<div class="text-right">
+<p class="font-price-display text-price-display text-primary">~ 806.40 €</p>
+<p class="font-code-mono text-code-mono text-outline mt-1">Avant déductions</p>
+</div>
+</div>
+</section>
+<!-- Signature Pad -->
+<section class="bg-surface rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-border p-lg flex flex-col gap-form-gap">
+<div>
+<h2 class="font-h3 text-h3 text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">draw</span>
+                    Zone de signature
+                </h2>
+<p class="font-body-secondary text-body-secondary text-on-surface-variant mt-1">Veuillez tracer votre signature dans le cadre ci-dessous.</p>
+</div>
+<div class="relative w-full h-[200px] bg-surface-container-lowest border-2 border-dashed border-outline-variant rounded-lg cursor-crosshair hover:border-primary-container transition-colors group overflow-hidden flex flex-col">
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40 group-hover:opacity-20 transition-opacity">
+<span class="font-h2 text-h2 text-outline-variant select-none">Signez ici</span>
+</div>
+<!-- Fake signature canvas area -->
+<div class="flex-1 w-full relative z-10">
+<svg class="absolute inset-0 w-full h-full pointer-events-none drop-shadow-sm" preserveaspectratio="xMidYMid meet" viewbox="0 0 400 200">
+<path class="signature-path" d="M 50 120 Q 80 80 120 120 T 180 90 T 220 140 Q 250 100 300 110" fill="transparent" stroke="#005387" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+</svg>
+</div>
+<!-- Ligne de base -->
+<div class="absolute bottom-8 left-8 right-8 border-b-2 border-surface-dim pointer-events-none"></div>
+</div>
+<!-- Contrôles du pad -->
+<div class="flex items-center justify-between mt-2">
+<button class="font-button-label text-button-label text-on-surface-variant hover:text-error hover:bg-error-container/20 px-4 py-2 rounded-lg transition-colors flex items-center gap-2 h-12 active:scale-[0.97]">
+<span class="material-symbols-outlined text-[20px]">ink_eraser</span>
+                    Effacer
+                </button>
+<button class="font-button-label text-button-label text-primary bg-primary-fixed/30 hover:bg-primary-fixed/50 px-5 py-2 rounded-lg transition-colors flex items-center gap-2 h-12 active:scale-[0.97]">
+<span class="material-symbols-outlined text-[20px]">check</span>
+                    Valider
+                </button>
+</div>
+</section>
+<!-- Mentions Légales -->
+<p class="font-body-secondary text-body-secondary text-outline text-center px-4">
+            Conformément à la réglementation européenne eIDAS, cette signature électronique possède la même valeur juridique qu'une signature manuscrite.
+        </p>
+</main>
+<!-- Sticky Bottom Action -->
+<div class="fixed bottom-0 left-0 w-full bg-surface border-t border-border p-4 sm:px-screen-edge sm:py-4 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] z-40">
+<div class="max-w-2xl mx-auto flex items-center justify-between gap-4">
+<div class="hidden sm:flex flex-col">
+<p class="font-body-secondary text-body-secondary text-on-surface-variant">Étape finale</p>
+<p class="font-body-main text-body-main font-semibold text-on-surface">Engagement contractuel</p>
+</div>
+<button class="flex-1 sm:flex-none w-full sm:w-auto h-[52px] bg-primary text-on-primary font-button-label text-button-label px-8 rounded-xl flex items-center justify-center gap-2 active:scale-[0.97] transition-transform shadow-md hover:bg-on-primary-fixed-variant">
+<span class="material-symbols-outlined">edit_document</span>
+                Signer et confirmer le contrat
+            </button>
+</div>
+</div>
+</body></html>

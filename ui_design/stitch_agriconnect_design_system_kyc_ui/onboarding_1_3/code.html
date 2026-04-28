@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Onboarding - AgriConnect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#ffe3c8",
+                        "text-muted": "#7F8C9A",
+                        "surface-container-low": "#f2f3f9",
+                        "secondary-fixed": "#9af6b8",
+                        "background": "#F5F7FA",
+                        "on-primary-fixed-variant": "#004a78",
+                        "on-secondary-fixed": "#00210f",
+                        "surface-tint": "#02629e",
+                        "on-background": "#191c20",
+                        "text-main": "#1A1A2E",
+                        "surface-container-highest": "#e1e2e8",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffddba",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#7ed99e",
+                        "primary": "#005387",
+                        "primary-fixed": "#cfe5ff",
+                        "warning-light": "#FEF4E7",
+                        "surface-container": "#eceef3",
+                        "tertiary": "#734600",
+                        "outline": "#717881",
+                        "on-secondary-container": "#047240",
+                        "on-primary-container": "#d9e9ff",
+                        "tertiary-container": "#945b00",
+                        "on-surface": "#191c20",
+                        "primary-container": "#1b6ca8",
+                        "on-secondary": "#ffffff",
+                        "border": "#E0E7EF",
+                        "secondary": "#006d3d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#414750",
+                        "on-tertiary-fixed": "#2b1700",
+                        "error": "#E74C3C",
+                        "primary-fixed-dim": "#9acbff",
+                        "surface-container-high": "#e6e8ed",
+                        "warning": "#F39C12",
+                        "on-primary-fixed": "#001d34",
+                        "surface-dim": "#d8dadf",
+                        "on-secondary-fixed-variant": "#00522d",
+                        "surface-variant": "#e1e2e8",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb865",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#97f3b5",
+                        "on-tertiary-fixed-variant": "#673d00",
+                        "success-light": "#EBF7EF",
+                        "surface-bright": "#f8f9ff",
+                        "inverse-on-surface": "#eff0f6",
+                        "outline-variant": "#c0c7d1",
+                        "inverse-primary": "#9acbff",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2e3135",
+                        "success": "#27AE60",
+                        "surface": "#FFFFFF"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "base": "4px",
+                        "screen-edge": "20px",
+                        "sm": "8px",
+                        "card-gap": "12px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "section-v": "24px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "2xl": "48px",
+                        "3xl": "64px",
+                        "form-gap": "16px"
+                    },
+                    fontFamily: {
+                        "code-mono": ["monospace"],
+                        "body-secondary": ["Be Vietnam Pro"],
+                        "button-label": ["Be Vietnam Pro"],
+                        "body-main": ["Be Vietnam Pro"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "price-display": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "code-mono": ["13px", { lineHeight: "1", fontWeight: "400" }],
+                        "body-secondary": ["13px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "button-label": ["15px", { lineHeight: "1", fontWeight: "700" }],
+                        "body-main": ["15px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "h3": ["18px", { lineHeight: "1.4", fontWeight: "600" }],
+                        "h2": ["22px", { lineHeight: "1.3", letterSpacing: "-0.3px", fontWeight: "700" }],
+                        "h1": ["28px", { lineHeight: "1.2", letterSpacing: "-0.3px", fontWeight: "800" }],
+                        "price-display": ["20px", { lineHeight: "1", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Tactile button feedback */
+        .btn-tactile:active {
+            transform: scale(0.97);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-main selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Action Bar -->
+<header class="flex justify-end items-center px-screen-edge py-md shrink-0">
+<button class="font-button-label text-button-label text-text-muted hover:text-on-surface transition-colors">
+            Passer
+        </button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col px-screen-edge pb-lg">
+<!-- Illustration Container -->
+<div class="flex-1 flex items-center justify-center py-lg relative w-full max-w-md mx-auto">
+<!-- Decorative background blob for modern feel -->
+<div class="absolute inset-0 bg-primary-fixed/30 rounded-full blur-3xl scale-75 opacity-70"></div>
+<div class="relative w-full aspect-square max-w-[320px] rounded-3xl overflow-hidden bg-surface-bright shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-surface-container flex items-center justify-center p-md">
+<img alt="Agriculteur au téléphone" class="w-full h-full object-cover rounded-xl" data-alt="Flat vector style illustration of a modern African farmer in a sun-drenched green field looking at a smartphone, warm color palette, clean corporate agricultural aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcgtWJuN8a_5cuFKdhUd-xTnPbBPbah70j-NfA2BWPMxasFfa4ZrpYXvf78yIcR-UtjynLvFj9qfB_yBu4-41JFulToUucf9ENLHqjwwnfh9qaINqCZSlkIygs4NLBY_uLLhRA7sBhQcDm6I09bcUGuwXRIYhbtTpoeKaa2rJpC-dQWev714POO35sAdiuUrYZanpYwWk4mimt6t2NhLrObDknL2fT8jDz31pQQB_PHu5UfNGzlcjSj-A_G99yEBYUzMVAV2wuDj0"/>
+</div>
+</div>
+<!-- Text & Progress Content -->
+<div class="flex flex-col items-center text-center mt-auto pb-xl max-w-md mx-auto w-full">
+<!-- Progress Dots -->
+<div class="flex gap-sm mb-lg justify-center items-center">
+<div class="w-8 h-2 rounded-full bg-warning transition-all duration-300"></div>
+<div class="w-2 h-2 rounded-full bg-surface-dim transition-all duration-300"></div>
+<div class="w-2 h-2 rounded-full bg-surface-dim transition-all duration-300"></div>
+</div>
+<!-- Copy -->
+<h1 class="font-h1 text-h1 text-text-main mb-md">
+                Trouvez de la main-d'œuvre en quelques minutes
+            </h1>
+<p class="font-body-main text-body-main text-text-muted px-sm">
+                Publiez une offre, géolocalisez les travailleurs disponibles et recrutez en toute confiance.
+            </p>
+</div>
+<!-- Bottom Action -->
+<div class="w-full max-w-md mx-auto shrink-0 pb-md pt-sm">
+<button class="btn-tactile w-full bg-primary text-on-primary font-button-label text-button-label rounded-xl py-4 flex items-center justify-center gap-sm transition-all duration-200 shadow-[0_4px_12px_rgba(0,83,135,0.15)] hover:shadow-[0_6px_16px_rgba(0,83,135,0.2)]" style="height: 52px;">
+                Suivant
+                <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'wght' 600;">arrow_forward</span>
+</button>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suivi de Mission - AgriConnect Main-d'œuvre</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#02629e",
+                        "on-primary-fixed": "#001d34",
+                        "tertiary-fixed-dim": "#ffb865",
+                        "primary-fixed": "#cfe5ff",
+                        "tertiary": "#734600",
+                        "success-light": "#EBF7EF",
+                        "on-primary-fixed-variant": "#004a78",
+                        "secondary": "#006d3d",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#945b00",
+                        "on-tertiary-container": "#ffe3c8",
+                        "text-main": "#1A1A2E",
+                        "surface-container-low": "#f2f3f9",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d8dadf",
+                        "error": "#E74C3C",
+                        "background": "#F5F7FA",
+                        "tertiary-fixed": "#ffddba",
+                        "surface-container": "#eceef3",
+                        "inverse-on-surface": "#eff0f6",
+                        "primary-fixed-dim": "#9acbff",
+                        "on-background": "#191c20",
+                        "text-muted": "#7F8C9A",
+                        "secondary-fixed": "#9af6b8",
+                        "secondary-container": "#97f3b5",
+                        "warning-light": "#FEF4E7",
+                        "surface": "#FFFFFF",
+                        "inverse-surface": "#2e3135",
+                        "outline": "#717881",
+                        "on-primary-container": "#d9e9ff",
+                        "on-tertiary-fixed": "#2b1700",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#414750",
+                        "on-secondary-fixed": "#00210f",
+                        "border": "#E0E7EF",
+                        "on-error-container": "#93000a",
+                        "success": "#27AE60",
+                        "primary": "#005387",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#7ed99e",
+                        "primary-container": "#1b6ca8",
+                        "on-surface": "#191c20",
+                        "inverse-primary": "#9acbff",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-container": "#047240",
+                        "on-tertiary-fixed-variant": "#673d00",
+                        "surface-container-highest": "#e1e2e8",
+                        "warning": "#F39C12",
+                        "surface-variant": "#e1e2e8",
+                        "outline-variant": "#c0c7d1",
+                        "on-secondary-fixed-variant": "#00522d",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e6e8ed"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "3xl": "64px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "card-gap": "12px",
+                        "form-gap": "16px",
+                        "2xl": "48px",
+                        "screen-edge": "20px",
+                        "md": "16px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "section-v": "24px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Plus Jakarta Sans"],
+                        "code-mono": ["monospace"],
+                        "button-label": ["Be Vietnam Pro"],
+                        "body-secondary": ["Be Vietnam Pro"],
+                        "body-main": ["Be Vietnam Pro"],
+                        "price-display": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "h3": ["18px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "code-mono": ["13px", {"lineHeight": "1", "fontWeight": "400"}],
+                        "button-label": ["15px", {"lineHeight": "1", "fontWeight": "700"}],
+                        "body-secondary": ["13px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-main": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "price-display": ["20px", {"lineHeight": "1", "fontWeight": "700"}],
+                        "h2": ["22px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "700"}],
+                        "h1": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.3px", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .shadow-card {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+            .shadow-card-hover {
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-main antialiased min-h-screen flex flex-col pb-3xl">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 h-16 bg-[#F5F7FA] dark:bg-slate-900 border-b border-[#E0E7EF] dark:border-slate-800 flex items-center justify-between px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full border-2 border-success overflow-hidden shrink-0">
+<img alt="Profil de l'agriculteur avec badge de vérification" class="w-full h-full object-cover" data-alt="Portrait of a friendly farmer smiling outdoors, natural lighting, wearing a practical cap and work shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArZ5eDD9EvcYT9mnip3nxFf367DslXEoH9nl2ajq6L6m1N-3qIivsvoEyz8dHFcoWa_RIE-mbkJ6_UeklodkC0XtJPsNE0TXI0LW1usOJVqc9UsraKDf1WfHTsjybMwqH3hFPTUe-_oHgF8NvjcsXYwXZ0Si-9_U97cMfI0hy67JhfZ7JfIBkBtpL_7hXnOItKalAcbW8bsGpj4VLGSzlvzoZXTKd3j8msopPZgxYMgC52e32cxozLOFZLJLbktBOl-HuZ_I0QwkI"/>
+</div>
+<h1 class="text-lg font-black text-[#1B6CA8] dark:text-blue-400 font-['Plus_Jakarta_Sans']">AgriConnect Main-d'œuvre</h1>
+</div>
+<button aria-label="Notifications" class="text-[#1B6CA8] dark:text-blue-400 hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-1 mt-16 px-screen-edge py-section-v flex flex-col gap-section-v max-w-3xl mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col gap-sm">
+<div class="flex items-center justify-between">
+<h2 class="font-h2 text-h2 text-primary">Récolte de Pommes - Verger Sud</h2>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-success-light border border-success">
+<span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+<span class="font-button-label text-button-label text-success text-[12px]">EN COURS</span>
+</div>
+</div>
+<p class="font-body-secondary text-body-secondary text-text-muted">Mission #MC-2023-089 • Démarrée ce matin à 06h30</p>
+</div>
+<!-- Timeline Section -->
+<section class="bg-surface rounded-xl shadow-card p-md border border-border">
+<h3 class="font-h3 text-h3 text-text-main mb-form-gap">Progression</h3>
+<div class="relative">
+<!-- Line -->
+<div class="absolute left-[15px] top-4 bottom-4 w-[2px] bg-surface-variant"></div>
+<!-- Active Line Segment -->
+<div class="absolute left-[15px] top-4 h-[60%] w-[2px] bg-success"></div>
+<div class="flex flex-col gap-4 relative z-10">
+<!-- Step 1: Validated -->
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-success flex items-center justify-center shrink-0 border-2 border-surface">
+<span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="pt-1">
+<p class="font-button-label text-[14px] text-text-main">Offre Publiée &amp; Validée</p>
+<p class="font-body-secondary text-body-secondary text-text-muted">Il y a 3 jours</p>
+</div>
+</div>
+<!-- Step 2: Validated -->
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-success flex items-center justify-center shrink-0 border-2 border-surface">
+<span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="pt-1">
+<p class="font-button-label text-[14px] text-text-main">Travailleur Assigné</p>
+<p class="font-body-secondary text-body-secondary text-text-muted">Hier à 14h00</p>
+</div>
+</div>
+<!-- Step 3: Validated -->
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-success flex items-center justify-center shrink-0 border-2 border-surface">
+<span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="pt-1">
+<p class="font-button-label text-[14px] text-text-main">Contrat Signé</p>
+<p class="font-body-secondary text-body-secondary text-text-muted">Ce matin à 06h15</p>
+</div>
+</div>
+<!-- Step 4: Active -->
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-surface border-2 border-success flex items-center justify-center shrink-0 relative">
+<div class="w-3 h-3 rounded-full bg-success animate-pulse"></div>
+</div>
+<div class="pt-1">
+<p class="font-button-label text-[14px] text-success">Mission en cours</p>
+<p class="font-body-secondary text-body-secondary text-text-muted">En cours de réalisation sur site</p>
+</div>
+</div>
+<!-- Step 5: Pending -->
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-surface border-2 border-outline-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-outline-variant text-[16px]">flag</span>
+</div>
+<div class="pt-1">
+<p class="font-button-label text-[14px] text-outline">Validation de fin</p>
+<p class="font-body-secondary text-body-secondary text-text-muted">En attente de complétion</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Mission Details Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-card-gap">
+<!-- Worker Info -->
+<section class="bg-surface rounded-xl shadow-card p-md border border-border flex items-center gap-4 hover:shadow-card-hover transition-shadow duration-300">
+<img alt="Photo du travailleur" class="w-16 h-16 rounded-full border border-border object-cover" data-alt="Portrait of a young male agricultural worker, reliable and professional appearance, warm natural daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0dv1dTIBQBoqEE8TL76Pb8ZS6gyX4RAZ3GsOfyhduYEV9VrZPq2dBq6IYQJzBn6aHyYAGV9Y58TdoQNz8Rj--eYGXQeiBfdN4AwCicGJASPaFZi2ejpFSsg5FkP52TUE4Nqq8ghX6QNyxQwOOX7sjmscwtucwQcyZNsMsJ72PMv10JkL8sGC19QbnI5NDPdLKSMfZ1yMNYHnJO9aisBTF9kWnEN0i453ZOTFZMvtPNNGQpjI1Mj95Mzs7xQSdMGHO_ib4UA9TvPk"/>
+<div class="flex-1">
+<h4 class="font-h3 text-[16px] text-text-main">Moussa Diop</h4>
+<p class="font-body-secondary text-body-secondary text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-warning" style="font-variation-settings: 'FILL' 1;">star</span>
+                        4.8 (12 missions)
+                    </p>
+<div class="mt-2 flex gap-2">
+<button class="w-8 h-8 rounded-full bg-primary-container/10 flex items-center justify-center text-primary active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">call</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-primary-container/10 flex items-center justify-center text-primary active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Key Info -->
+<section class="bg-surface rounded-xl shadow-card p-md border border-border flex flex-col justify-center gap-3">
+<div class="flex justify-between items-center">
+<span class="font-body-secondary text-body-secondary text-text-muted">Rémunération</span>
+<span class="font-price-display text-price-display text-text-main">45 000 FCFA</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-secondary text-body-secondary text-text-muted">Durée estimée</span>
+<span class="font-button-label text-[14px] text-text-main">3 jours</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-secondary text-body-secondary text-text-muted">Tâches</span>
+<span class="font-button-label text-[14px] text-text-main">Récolte, Tri</span>
+</div>
+</section>
+</div>
+<!-- Geolocation Map Card -->
+<section class="bg-surface rounded-xl shadow-card overflow-hidden border border-border flex flex-col">
+<div class="p-md border-b border-border flex items-center justify-between">
+<h3 class="font-h3 text-h3 text-text-main flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">location_on</span>
+                    Position du champ
+                 </h3>
+<span class="text-[12px] font-body-secondary text-text-muted">Verger Sud, Parcelle B</span>
+</div>
+<div class="h-[200px] w-full relative bg-surface-container-low" data-location="Dakar" style="">
+<!-- Simulated Map Image -->
+<img alt="Carte géolocalisée du champ" class="w-full h-full object-cover" data-alt="Aerial view of agricultural fields with a clear map style overlay, green orchards, daytime" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD7opI5iZVKoU8SkWvxWWMjwpv2MTXDrSb50TFsJiIp9RRTXh9f2CLs8AOK1SuT4kcKUm_bGE6n2sAxl0kQqbXXxDuASMfL0JjZPLhbrqKCY7WqC2M_3Vp-u26x4H2nOTj_XPEuB4ISkMqyuqcQeYZPI1HXJyqlpM689xRoFEODmtcV_j8k6zU0Km4hz-JHvXfGjlJcagWfAKmA3ST7G75JUbX1XPB3U79ByuA9mCA3a3wSBsqCmiVMs6Ug6x5D4uu1Z1B93psD8A"/>
+<!-- Map Overlay Elements -->
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<!-- Marker -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="bg-primary text-on-primary px-3 py-1 rounded-lg shadow-md font-button-label text-[12px] mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">person_pin</span>
+                        Sur site
+                    </div>
+<div class="w-4 h-4 rounded-full bg-primary border-2 border-white shadow-sm relative">
+<div class="absolute inset-0 rounded-full bg-primary animate-ping opacity-50"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Action Buttons -->
+<section class="flex flex-col gap-3 mt-4">
+<button class="w-full h-[52px] bg-success text-on-primary rounded-lg font-button-label text-button-label flex items-center justify-center gap-2 shadow-card hover:shadow-card-hover hover:opacity-90 active:scale-[0.97] transition-all duration-200">
+<span class="material-symbols-outlined">check_circle</span>
+                ✅ Valider la fin de mission
+            </button>
+<button class="w-full h-[52px] bg-transparent border border-error text-error rounded-lg font-button-label text-button-label flex items-center justify-center gap-2 hover:bg-error-container/20 active:scale-[0.97] transition-all duration-200">
+<span class="material-symbols-outlined text-error">report_problem</span>
+                Signaler un problème
+            </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full h-[64px] z-50 border-t border-[#E0E7EF] dark:border-slate-800 bg-white dark:bg-slate-950 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] md:hidden">
+<ul class="flex justify-around items-center w-full px-4 h-full">
+<li>
+<a class="flex flex-col items-center justify-center text-[#1B6CA8] dark:text-blue-400 relative after:content-[''] after:block after:w-1 after:h-1 after:bg-[#E8941A] after:rounded-full after:mt-1 hover:bg-slate-50 dark:hover:bg-slate-900 active:scale-[0.97] transition-all duration-200 font-['Plus_Jakarta_Sans'] text-[11px] font-medium p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">work</span>
+                    Missions
+                </a>
+</li>
+<li>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-900 active:scale-[0.97] transition-all duration-200 font-['Plus_Jakarta_Sans'] text-[11px] font-medium p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">group</span>
+                    Candidats
+                </a>
+</li>
+<li>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-900 active:scale-[0.97] transition-all duration-200 font-['Plus_Jakarta_Sans'] text-[11px] font-medium p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">description</span>
+                    Contrats
+                </a>
+</li>
+<li>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-900 active:scale-[0.97] transition-all duration-200 font-['Plus_Jakarta_Sans'] text-[11px] font-medium p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+                    Profil
+                </a>
+</li>
+</ul>
+</nav>
+</body></html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mon Profil - AgriConnect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#945b00",
+                        "on-background": "#191c20",
+                        "surface-tint": "#02629e",
+                        "primary-fixed-dim": "#9acbff",
+                        "on-tertiary-fixed-variant": "#673d00",
+                        "inverse-primary": "#9acbff",
+                        "primary-fixed": "#cfe5ff",
+                        "on-tertiary-container": "#ffe3c8",
+                        "tertiary-fixed-dim": "#ffb865",
+                        "secondary-fixed-dim": "#7ed99e",
+                        "secondary-fixed": "#9af6b8",
+                        "surface-container-high": "#e6e8ed",
+                        "on-primary-fixed": "#001d34",
+                        "border": "#E0E7EF",
+                        "tertiary-fixed": "#ffddba",
+                        "success": "#27AE60",
+                        "surface-container": "#eceef3",
+                        "outline-variant": "#c0c7d1",
+                        "secondary-container": "#97f3b5",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "warning-light": "#FEF4E7",
+                        "secondary": "#006d3d",
+                        "surface-variant": "#e1e2e8",
+                        "on-tertiary-fixed": "#2b1700",
+                        "primary-container": "#1b6ca8",
+                        "success-light": "#EBF7EF",
+                        "on-surface-variant": "#414750",
+                        "on-error": "#ffffff",
+                        "surface": "#FFFFFF",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#00210f",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary": "#ffffff",
+                        "warning": "#F39C12",
+                        "on-primary-fixed-variant": "#004a78",
+                        "primary": "#005387",
+                        "on-secondary-fixed-variant": "#00522d",
+                        "surface-container-highest": "#e1e2e8",
+                        "surface-container-low": "#f2f3f9",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#191c20",
+                        "error": "#E74C3C",
+                        "tertiary": "#734600",
+                        "text-main": "#1A1A2E",
+                        "surface-dim": "#d8dadf",
+                        "on-secondary-container": "#047240",
+                        "error-container": "#ffdad6",
+                        "outline": "#717881",
+                        "inverse-on-surface": "#eff0f6",
+                        "background": "#F5F7FA",
+                        "text-muted": "#7F8C9A",
+                        "inverse-surface": "#2e3135",
+                        "on-primary-container": "#d9e9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "screen-edge": "20px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "form-gap": "16px",
+                        "3xl": "64px",
+                        "section-v": "24px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "card-gap": "12px",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "body-secondary": ["Be Vietnam Pro"],
+                        "button-label": ["Be Vietnam Pro"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "price-display": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "code-mono": ["monospace"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "body-main": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "body-secondary": ["13px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "button-label": ["15px", {"lineHeight": "1", "fontWeight": "700"}],
+                        "h1": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.3px", "fontWeight": "800"}],
+                        "price-display": ["20px", {"lineHeight": "1", "fontWeight": "700"}],
+                        "h2": ["22px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "700"}],
+                        "code-mono": ["13px", {"lineHeight": "1", "fontWeight": "400"}],
+                        "h3": ["18px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-main": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #F5F7FA; }
+        .haptic-pulse:active { transform: scale(0.97); transition: transform 0.1s ease-in-out; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-text-main pb-[80px]">
+<!-- TopAppBar (From JSON) -->
+<header class="fixed top-0 w-full z-50 bg-white shadow-sm flex items-center justify-between px-5 h-16 w-full border-b border-slate-100 dark:bg-slate-900 dark:border-slate-800 dark:shadow-none font-['Plus_Jakarta_Sans'] font-semibold">
+<div class="flex items-center gap-3">
+<img alt="User profile photo" class="w-8 h-8 rounded-full border border-border" data-alt="close up of an african farmer smiling warmly in a sunlit field wearing a straw hat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOPHOVBix4yd1aMlQrKj_o9DDkVEeaygH4fbQgwnteqiqOyV_5GemmO7Lor9AQts-zJBeJ8u1DbLNDAuxfj0hL9h602Ps5CVLoA74u4aR1FRqfFR8UCm9JchCTxb7gUGCdblmNzHNG1DSfNX6Y0WQcQ80ZONRcFxUmbfaUfN3mG3RLIg_Aij361hSNAsMqRZU0mL2LdRHoLUgpY_NJDkAZYt2OV5HRqAWjGLNGqebwzEArlvVqLzzMUvClNW61PRYAL4F-JFF9xuA"/>
+</div>
+<div class="text-lg font-bold text-blue-800 dark:text-white">AgriConnect</div>
+<button class="haptic-pulse active:scale-95 transition-all text-blue-700 dark:text-blue-400">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<!-- Header Profil (Custom based on prompt) -->
+<section class="mt-16 relative">
+<!-- Gradient Background -->
+<div class="h-[220px] bg-gradient-to-r from-[#1B6CA8] to-[#2E8B57] flex flex-col items-center pt-8">
+<!-- Avatar & Badge -->
+<div class="relative">
+<img alt="Jean Dupont" class="w-[90px] h-[90px] rounded-full border-4 border-white shadow-md object-cover bg-white" data-alt="close up portrait of a confident african male farmer in a clean white shirt standing in a sunny agricultural setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcAvJLZTG9uhf4dXJv1_8Z4Ax8SGsNZnJD_UcRAnKjyz5iBGIbrDbyS9Bo93svTVae5DTJ_oa3J88DKr25otIRzVYTlRfge2E359ReSSvdY5lRCqOTdCPcKzROixp7IOMXcR_r3tG4KtojMqi-OQqYztrnIGi-zi8-rBOCVldjHd_M4BRzrHmam5__SdHBb7FhnqVdJBPuA0mns5z0A-eb-CVu0ejZeOHLFW5g5Zp3h9LyHbDcqZtbGFy7g-yxrjzXWshkRksYUP4"/>
+<div class="absolute bottom-0 right-0 bg-success text-on-primary rounded-full w-6 h-6 flex items-center justify-center border-2 border-white shadow-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<!-- Name & Roles -->
+<h1 class="font-h2 text-h2 text-on-primary mt-3">Jean Dupont</h1>
+<div class="flex gap-2 mt-2">
+<span class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-white font-body-secondary text-body-secondary border border-white/30">Agriculteur</span>
+<span class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-white font-body-secondary text-body-secondary border border-white/30">Producteur</span>
+</div>
+</div>
+<!-- Edit Profile Button (Overlapping) -->
+<div class="flex justify-center -mt-6 relative z-10">
+<button class="haptic-pulse bg-white text-primary-container border border-border shadow-sm px-6 py-2 rounded-full font-button-label text-button-label flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+                Modifier le profil
+            </button>
+</div>
+</section>
+<!-- Main Content Canvas -->
+<main class="px-screen-edge mt-section-v flex flex-col gap-section-v">
+<!-- Stats Rapides -->
+<section class="bg-surface rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] p-4 flex justify-between">
+<div class="flex flex-col items-center flex-1 border-r border-border">
+<span class="font-h2 text-h2 text-text-main">3</span>
+<span class="font-body-secondary text-body-secondary text-text-muted mt-1">Missions</span>
+</div>
+<div class="flex flex-col items-center flex-1 border-r border-border">
+<span class="font-h2 text-h2 text-text-main">15</span>
+<span class="font-body-secondary text-body-secondary text-text-muted mt-1">Ventes</span>
+</div>
+<div class="flex flex-col items-center flex-1">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-warning text-[18px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-h2 text-h2 text-text-main">4.9</span>
+</div>
+<span class="font-body-secondary text-body-secondary text-text-muted mt-1">Note</span>
+</div>
+</section>
+<!-- Informations -->
+<section class="bg-surface rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] p-md flex flex-col gap-form-gap">
+<h3 class="font-h3 text-h3 text-text-main">Informations</h3>
+<div class="flex items-start gap-3">
+<div class="bg-surface-container w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary-container" data-icon="location_on">location_on</span>
+</div>
+<div>
+<span class="font-body-secondary text-body-secondary text-text-muted block">Localisation</span>
+<span class="font-body-main text-body-main text-text-main font-medium">Yaoundé</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="bg-surface-container w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary-container" data-icon="language">language</span>
+</div>
+<div>
+<span class="font-body-secondary text-body-secondary text-text-muted block">Langues parlées</span>
+<span class="font-body-main text-body-main text-text-main font-medium">Français, Anglais</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="bg-surface-container w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-success" data-icon="eco">eco</span>
+</div>
+<div>
+<span class="font-body-secondary text-body-secondary text-text-muted block">Spécialités agricoles</span>
+<div class="flex gap-2 mt-1">
+<span class="bg-success-light text-success px-2 py-0.5 rounded text-[12px] font-medium">Cacao</span>
+<span class="bg-warning-light text-warning px-2 py-0.5 rounded text-[12px] font-medium">Maïs</span>
+</div>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="bg-surface-container w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary-container" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<div>
+<span class="font-body-secondary text-body-secondary text-text-muted block">Mobile Money lié</span>
+<span class="font-body-main text-body-main text-text-main font-medium">MTN MoMo</span>
+</div>
+</div>
+</section>
+<!-- Réputation -->
+<section class="bg-surface rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] p-md flex flex-col gap-4">
+<h3 class="font-h3 text-h3 text-text-main">Réputation</h3>
+<div class="flex items-center gap-4 bg-surface-container-low p-4 rounded-lg">
+<div class="flex flex-col items-center">
+<span class="font-h1 text-h1 text-text-main">4.9</span>
+<div class="flex text-warning mt-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="star_half" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="font-body-secondary text-body-secondary text-text-muted mt-1">24 avis</span>
+</div>
+<div class="flex-1 flex flex-col gap-1">
+<div class="flex items-center gap-2"><span class="text-[12px] text-text-muted w-2">5</span><div class="flex-1 h-2 bg-surface-variant rounded-full overflow-hidden"><div class="h-full bg-warning w-[85%]"></div></div></div>
+<div class="flex items-center gap-2"><span class="text-[12px] text-text-muted w-2">4</span><div class="flex-1 h-2 bg-surface-variant rounded-full overflow-hidden"><div class="h-full bg-warning w-[10%]"></div></div></div>
+<div class="flex items-center gap-2"><span class="text-[12px] text-text-muted w-2">3</span><div class="flex-1 h-2 bg-surface-variant rounded-full overflow-hidden"><div class="h-full bg-warning w-[5%]"></div></div></div>
+<div class="flex items-center gap-2"><span class="text-[12px] text-text-muted w-2">2</span><div class="flex-1 h-2 bg-surface-variant rounded-full overflow-hidden"><div class="h-full bg-warning w-[0%]"></div></div></div>
+<div class="flex items-center gap-2"><span class="text-[12px] text-text-muted w-2">1</span><div class="flex-1 h-2 bg-surface-variant rounded-full overflow-hidden"><div class="h-full bg-warning w-[0%]"></div></div></div>
+</div>
+</div>
+<div class="flex flex-col gap-4 mt-2">
+<!-- Review 1 -->
+<div class="border-b border-border pb-4 last:border-0 last:pb-0">
+<div class="flex justify-between items-start mb-2">
+<div class="flex gap-2 items-center">
+<img alt="Aline M." class="w-8 h-8 rounded-full bg-surface-variant" data-alt="small circular portrait of a smiling african woman in a casual top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5yNa43nYzAHD6hfSyhEw1tQtELXlnJQeHBkMeVb5wZemSi-LQTy5DBscWrC9KXhf86zgdQQdW5RdFXqtTIMQwv6VxddUxkDvUwOWGUw8Txj5rYLhgTyEn39TmjizsMzxXcvkIaTdrarjMaUpgQ2-mSrphHOYLah7QIzQR-Vnn5jKYk9HySQBY4hOMdm0PItyMsIf6m_spT5RSaMktVB1K2IDkpnsdoiEZTr857DxY7zIKKQS65PV7e-LWQMJPdES5rQXUWJ_5JYY"/>
+<span class="font-body-main text-body-main font-semibold text-text-main">Aline M.</span>
+</div>
+<span class="font-body-secondary text-body-secondary text-text-muted">Il y a 2 jours</span>
+</div>
+<div class="flex text-warning mb-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-main text-body-main text-on-surface-variant">Produits d'excellente qualité et livraison rapide. Je recommande vivement Jean pour son sérieux.</p>
+</div>
+</div>
+<button class="haptic-pulse w-full py-3 mt-2 text-primary-container font-button-label text-button-label border border-border rounded-lg bg-white">
+                Voir tous les avis (24)
+            </button>
+</section>
+<!-- Paramètres -->
+<section class="bg-surface rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] overflow-hidden mb-8">
+<h3 class="font-h3 text-h3 text-text-main p-md border-b border-border">Paramètres</h3>
+<ul class="flex flex-col">
+<li class="border-b border-border last:border-0">
+<a class="haptic-pulse flex items-center justify-between p-md hover:bg-surface-container-lowest transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-muted" data-icon="notifications">notifications</span>
+<span class="font-body-main text-body-main text-text-main">Notifications</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</a>
+</li>
+<li class="border-b border-border last:border-0">
+<a class="haptic-pulse flex items-center justify-between p-md hover:bg-surface-container-lowest transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-muted" data-icon="lock">lock</span>
+<span class="font-body-main text-body-main text-text-main">Confidentialité</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</a>
+</li>
+<li class="border-b border-border last:border-0">
+<a class="haptic-pulse flex items-center justify-between p-md hover:bg-surface-container-lowest transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-muted" data-icon="security">security</span>
+<span class="font-body-main text-body-main text-text-main">Sécurité</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</a>
+</li>
+<li class="border-b border-border last:border-0">
+<a class="haptic-pulse flex items-center justify-between p-md hover:bg-surface-container-lowest transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-muted" data-icon="language">language</span>
+<span class="font-body-main text-body-main text-text-main">Langue</span>
+</div>
+<span class="font-body-secondary text-body-secondary text-text-muted mr-2">Français</span>
+</a>
+</li>
+<li class="border-b border-border last:border-0">
+<a class="haptic-pulse flex items-center justify-between p-md hover:bg-surface-container-lowest transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-muted" data-icon="help">help</span>
+<span class="font-body-main text-body-main text-text-main">Aide &amp; Support</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</a>
+</li>
+<li class="border-b border-border last:border-0">
+<a class="haptic-pulse flex items-center justify-between p-md hover:bg-surface-container-lowest transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-muted" data-icon="description">description</span>
+<span class="font-body-main text-body-main text-text-main">Conditions d'utilisation</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</a>
+</li>
+<li class="border-0">
+<a class="haptic-pulse flex items-center gap-3 p-md hover:bg-error-container transition-colors mt-2" href="#">
+<span class="material-symbols-outlined text-error" data-icon="logout">logout</span>
+<span class="font-body-main text-body-main text-error font-semibold">Se déconnecter</span>
+</a>
+</li>
+</ul>
+</section>
+</main>
+<!-- BottomNavBar (From JSON) -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] flex justify-around items-center h-[64px] px-4 w-full font-['Plus_Jakarta_Sans'] text-[12px] font-medium">
+<!-- Home (Inactive) -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 active:scale-90 transition-transform haptic-pulse scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span>Home</span>
+</a>
+<!-- Market (Inactive) -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 active:scale-90 transition-transform haptic-pulse scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span>Market</span>
+</a>
+<!-- Alerts (Inactive) -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 active:scale-90 transition-transform haptic-pulse scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span>Alerts</span>
+</a>
+<!-- Profile (Active) -->
+<a class="flex flex-col items-center justify-center text-blue-700 dark:text-blue-400 relative after:content-[''] after:block after:w-1 after:h-1 after:bg-orange-500 after:rounded-full after:mt-1 active:scale-90 transition-transform haptic-pulse scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person" data-weight="fill" style="font-variation-settings: 'FILL' 1;">person</span>
+<span>Profile</span>
+</a>
+</nav>
+</body></html>

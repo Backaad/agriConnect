@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Mon panier (3 articles)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-background": "#191c20",
+                  "tertiary-fixed-dim": "#ffb865",
+                  "on-tertiary-container": "#ffe3c8",
+                  "surface-variant": "#e1e2e8",
+                  "primary-container": "#1b6ca8",
+                  "inverse-surface": "#2e3135",
+                  "on-surface": "#191c20",
+                  "on-secondary-fixed": "#00210f",
+                  "background": "#F5F7FA",
+                  "surface-container-low": "#f2f3f9",
+                  "error": "#E74C3C",
+                  "surface-container-highest": "#e1e2e8",
+                  "on-tertiary": "#ffffff",
+                  "surface": "#FFFFFF",
+                  "surface-container": "#eceef3",
+                  "on-secondary-fixed-variant": "#00522d",
+                  "error-container": "#ffdad6",
+                  "text-main": "#1A1A2E",
+                  "surface-container-high": "#e6e8ed",
+                  "secondary": "#006d3d",
+                  "on-primary-fixed": "#001d34",
+                  "primary-fixed": "#cfe5ff",
+                  "on-secondary": "#ffffff",
+                  "secondary-fixed": "#9af6b8",
+                  "tertiary-fixed": "#ffddba",
+                  "success": "#27AE60",
+                  "secondary-container": "#97f3b5",
+                  "surface-dim": "#d8dadf",
+                  "border": "#E0E7EF",
+                  "on-tertiary-fixed-variant": "#673d00",
+                  "on-tertiary-fixed": "#2b1700",
+                  "on-error": "#ffffff",
+                  "secondary-fixed-dim": "#7ed99e",
+                  "success-light": "#EBF7EF",
+                  "on-surface-variant": "#414750",
+                  "inverse-on-surface": "#eff0f6",
+                  "tertiary-container": "#945b00",
+                  "outline": "#717881",
+                  "primary-fixed-dim": "#9acbff",
+                  "text-muted": "#7F8C9A",
+                  "surface-container-lowest": "#ffffff",
+                  "outline-variant": "#c0c7d1",
+                  "on-primary-container": "#d9e9ff",
+                  "on-secondary-container": "#047240",
+                  "on-primary-fixed-variant": "#004a78",
+                  "on-primary": "#ffffff",
+                  "inverse-primary": "#9acbff",
+                  "primary": "#005387",
+                  "tertiary": "#734600",
+                  "warning": "#F39C12",
+                  "surface-bright": "#f8f9ff",
+                  "surface-tint": "#02629e",
+                  "warning-light": "#FEF4E7",
+                  "on-error-container": "#93000a"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "xl": "32px",
+                  "base": "4px",
+                  "screen-edge": "20px",
+                  "xs": "4px",
+                  "lg": "24px",
+                  "card-gap": "12px",
+                  "section-v": "24px",
+                  "2xl": "48px",
+                  "sm": "8px",
+                  "form-gap": "16px",
+                  "3xl": "64px",
+                  "md": "16px"
+          },
+          "fontFamily": {
+                  "h3": [
+                          "Plus Jakarta Sans"
+                  ],
+                  "body-secondary": [
+                          "Be Vietnam Pro"
+                  ],
+                  "price-display": [
+                          "Plus Jakarta Sans"
+                  ],
+                  "button-label": [
+                          "Be Vietnam Pro"
+                  ],
+                  "h1": [
+                          "Plus Jakarta Sans"
+                  ],
+                  "body-main": [
+                          "Be Vietnam Pro"
+                  ],
+                  "code-mono": [
+                          "monospace"
+                  ],
+                  "h2": [
+                          "Plus Jakarta Sans"
+                  ]
+          },
+          "fontSize": {
+                  "h3": [
+                          "18px",
+                          {
+                                  "lineHeight": "1.4",
+                                  "fontWeight": "600"
+                          }
+                  ],
+                  "body-secondary": [
+                          "13px",
+                          {
+                                  "lineHeight": "1.6",
+                                  "fontWeight": "400"
+                          }
+                  ],
+                  "price-display": [
+                          "20px",
+                          {
+                                  "lineHeight": "1",
+                                  "fontWeight": "700"
+                          }
+                  ],
+                  "button-label": [
+                          "15px",
+                          {
+                                  "lineHeight": "1",
+                                  "fontWeight": "700"
+                          }
+                  ],
+                  "h1": [
+                          "28px",
+                          {
+                                  "lineHeight": "1.2",
+                                  "letterSpacing": "-0.3px",
+                                  "fontWeight": "800"
+                          }
+                  ],
+                  "body-main": [
+                          "15px",
+                          {
+                                  "lineHeight": "1.6",
+                                  "fontWeight": "400"
+                          }
+                  ],
+                  "code-mono": [
+                          "13px",
+                          {
+                                  "lineHeight": "1",
+                                  "fontWeight": "400"
+                          }
+                  ],
+                  "h2": [
+                          "22px",
+                          {
+                                  "lineHeight": "1.3",
+                                  "letterSpacing": "-0.3px",
+                                  "fontWeight": "700"
+                          }
+                  ]
+          }
+  },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pb-[120px]">
+<!-- TopAppBar (Suppressed default nav for transactional flow, custom simple header) -->
+<header class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200 h-16 flex items-center px-5">
+<button aria-label="Retour" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant transition-colors text-text-main">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-h3 text-h3 text-text-main flex-1 text-center pr-10">Mon panier (3 articles)</h1>
+</header>
+<main class="flex-1 mt-16 px-screen-edge py-section-v flex flex-col gap-section-v max-w-3xl mx-auto w-full">
+<!-- Producer Group 1 -->
+<section class="bg-surface rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] overflow-hidden">
+<div class="p-md border-b border-surface-variant flex items-center gap-sm bg-surface-bright">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<h2 class="font-h3 text-h3 text-text-main">Ferme de la Vallée</h2>
+</div>
+<div class="p-md flex flex-col gap-md">
+<!-- Item 1 -->
+<div class="flex gap-md">
+<img alt="Carottes Bio" class="w-20 h-20 object-cover rounded-lg" data-alt="Fresh orange carrots with green tops in a rustic basket" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK4l_ZEDhCkGotq8O-XwQ1vCZolewYs4nqjllSiKCKbHjJjPrKta9GbX67X6Bl21TuwF2A0Ou1g89j5F07Hd-fMu4pKzVAMLF5kMGS101KsYG5pGYUZbCnGSJlbcVoZrckJ-lTLCBJ6cdahGM4O_vZolvlxz98QR6qlPczTpOW_MnNJmEbxsXJH0ML3oH3PO3plxo-guPRhwgJBAd1oar-2dqq7Xv2eox1ZpbwWmdBOOP8cOHMmhnBQz2i5mrK0D4E51XdAB0pCTI"/>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-h3 text-body-main font-bold text-text-main">Carottes Bio (Botte)</h3>
+<p class="font-price-display text-price-display text-primary mt-1">2,50 €</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<button class="text-text-muted hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+<div class="flex items-center bg-surface-container-low rounded-lg border border-border">
+<button class="w-8 h-8 flex items-center justify-center text-text-main hover:bg-surface-variant rounded-l-lg transition-colors"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+<span class="font-body-main text-body-main text-text-main w-8 text-center font-bold">2</span>
+<button class="w-8 h-8 flex items-center justify-center text-text-main hover:bg-surface-variant rounded-r-lg transition-colors"><span class="material-symbols-outlined text-[18px]">add</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-md border-t border-surface-variant pt-md">
+<img alt="Tomates Anciennes" class="w-20 h-20 object-cover rounded-lg" data-alt="Ripe red tomatoes on a wooden table with natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIWzjEOsUAg1gzKuFlB1Wm2pOq6XaXwLafvQbOSONviqZ-HQ365HEdRTb0dn3I-65qzn6SBpmeowE2Asl8Xp-rcLq0gCvqFT7pq6JgD8jtwae8biJ_H_8i9yBccVFKEaxVRWEl-jHO00VSfJoEAH6UAnfQ-2NZWAnQTRGR31D1b0peUcZLIoMB1QOZZsTo6-Y7CSf33Hotj8Zwx4Klv5FCkXtrrQWBAxnc579IRT9kayfRR9caWAECFha3YR7vL3GSRSA69Mox6n0"/>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-h3 text-body-main font-bold text-text-main">Tomates Anciennes (1kg)</h3>
+<p class="font-price-display text-price-display text-primary mt-1">4,80 €</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<button class="text-text-muted hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+<div class="flex items-center bg-surface-container-low rounded-lg border border-border">
+<button class="w-8 h-8 flex items-center justify-center text-text-main hover:bg-surface-variant rounded-l-lg transition-colors"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+<span class="font-body-main text-body-main text-text-main w-8 text-center font-bold">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-text-main hover:bg-surface-variant rounded-r-lg transition-colors"><span class="material-symbols-outlined text-[18px]">add</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Delivery Toggle -->
+<div class="p-md bg-surface-container-low border-t border-surface-variant flex flex-col gap-sm">
+<span class="font-body-secondary text-body-secondary text-text-muted uppercase tracking-wider">Mode de réception</span>
+<div class="flex bg-surface rounded-lg p-1 border border-border">
+<button class="flex-1 py-2 px-4 rounded-md bg-primary-container text-white font-button-label text-button-label text-center shadow-sm transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+            Livraison (+3,50€)
+          </button>
+<button class="flex-1 py-2 px-4 rounded-md text-text-main font-button-label text-button-label text-center hover:bg-surface-variant transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">store</span>
+            Enlèvement (Gratuit)
+          </button>
+</div>
+</div>
+</section>
+<!-- Producer Group 2 -->
+<section class="bg-surface rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] overflow-hidden">
+<div class="p-md border-b border-surface-variant flex items-center gap-sm bg-surface-bright">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<h2 class="font-h3 text-h3 text-text-main">Miel &amp; Sens</h2>
+</div>
+<div class="p-md flex flex-col gap-md">
+<!-- Item 3 -->
+<div class="flex gap-md">
+<img alt="Miel de Lavande" class="w-20 h-20 object-cover rounded-lg" data-alt="Jar of golden honey with a wooden dipper on a white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvWF_TQ0SEOnLufUEDhomFZa700P0XJo6-1VGxytZKbKhFH-xm3fR0XsqeQMvCqf0GeSZ6B5vduS03tdbEX2SWBD8ThLtMjW_mrBmATKeKy82pfXi_cEIKAgwD4olhsaUtr_unBhLR4Lo4mhGdsf9g09qaej5DjHkukUiq52Ipb4YOX9Eppg8QBNLAXp-An9foBeLmNsfag96qIwoZ4xGC42ULKULMaq6r5pR_E24awddqBqEtFrSPO5s2tq1qGkjw635Uk4G1kro"/>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-h3 text-body-main font-bold text-text-main">Miel de Lavande (500g)</h3>
+<p class="font-price-display text-price-display text-primary mt-1">12,00 €</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<button class="text-text-muted hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+<div class="flex items-center bg-surface-container-low rounded-lg border border-border">
+<button class="w-8 h-8 flex items-center justify-center text-text-main hover:bg-surface-variant rounded-l-lg transition-colors"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+<span class="font-body-main text-body-main text-text-main w-8 text-center font-bold">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-text-main hover:bg-surface-variant rounded-r-lg transition-colors"><span class="material-symbols-outlined text-[18px]">add</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Delivery Toggle -->
+<div class="p-md bg-surface-container-low border-t border-surface-variant flex flex-col gap-sm">
+<span class="font-body-secondary text-body-secondary text-text-muted uppercase tracking-wider">Mode de réception</span>
+<div class="flex bg-surface rounded-lg p-1 border border-border">
+<button class="flex-1 py-2 px-4 rounded-md text-text-main font-button-label text-button-label text-center hover:bg-surface-variant transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">local_shipping</span>
+            Livraison (+4,00€)
+          </button>
+<button class="flex-1 py-2 px-4 rounded-md bg-primary-container text-white font-button-label text-button-label text-center shadow-sm transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">store</span>
+            Enlèvement (Gratuit)
+          </button>
+</div>
+</div>
+</section>
+<!-- Order Summary -->
+<section class="bg-surface rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] p-md flex flex-col gap-sm">
+<h2 class="font-h2 text-h2 text-text-main mb-2">Récapitulatif</h2>
+<div class="flex justify-between items-center py-2 border-b border-dashed border-surface-variant">
+<span class="font-body-main text-body-main text-text-muted">Sous-total (3 articles)</span>
+<span class="font-body-main text-body-main text-text-main font-bold">21,80 €</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-dashed border-surface-variant">
+<span class="font-body-main text-body-main text-text-muted">Frais de livraison</span>
+<span class="font-body-main text-body-main text-text-main font-bold">3,50 €</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-dashed border-surface-variant">
+<span class="font-body-main text-body-main text-text-muted">Frais de service (2%)</span>
+<span class="font-body-main text-body-main text-text-main font-bold">0,44 €</span>
+</div>
+<div class="flex justify-between items-center pt-4 mt-2">
+<span class="font-h2 text-h2 text-text-main">Total</span>
+<span class="font-price-display text-price-display text-2xl text-primary">25,74 €</span>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Action (Checkout) -->
+<div class="fixed bottom-0 w-full z-50 bg-surface shadow-[0_-4px_12px_rgba(0,0,0,0.05)] border-t border-border px-screen-edge py-md pb-safe">
+<div class="max-w-3xl mx-auto flex items-center justify-between gap-md">
+<div class="flex flex-col">
+<span class="font-body-secondary text-body-secondary text-text-muted">Total à payer</span>
+<span class="font-price-display text-price-display text-primary">25,74 €</span>
+</div>
+<button class="bg-[#E8941A] hover:bg-[#d68512] active:scale-[0.97] transition-all text-white font-button-label text-button-label h-[52px] px-8 rounded-lg shadow-sm flex items-center justify-center gap-2 flex-1 max-w-[240px]">
+<span>Passer la commande</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+</button>
+</div>
+</div>
+</body></html>

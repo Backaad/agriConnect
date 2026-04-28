@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgriConnect - Accueil</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#673d00",
+                        "on-secondary": "#ffffff",
+                        "error": "#E74C3C",
+                        "warning-light": "#FEF4E7",
+                        "warning": "#F39C12",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#00522d",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e1e2e8",
+                        "success": "#27AE60",
+                        "tertiary": "#734600",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#7ed99e",
+                        "secondary": "#006d3d",
+                        "inverse-surface": "#2e3135",
+                        "surface-tint": "#02629e",
+                        "surface-container": "#eceef3",
+                        "secondary-container": "#97f3b5",
+                        "surface-container-highest": "#e1e2e8",
+                        "on-primary-fixed": "#001d34",
+                        "inverse-on-surface": "#eff0f6",
+                        "tertiary-fixed-dim": "#ffb865",
+                        "on-primary-container": "#d9e9ff",
+                        "surface-container-high": "#e6e8ed",
+                        "surface": "#FFFFFF",
+                        "on-primary-fixed-variant": "#004a78",
+                        "text-main": "#1A1A2E",
+                        "outline": "#717881",
+                        "on-surface-variant": "#414750",
+                        "primary-container": "#1b6ca8",
+                        "border": "#E0E7EF",
+                        "on-tertiary-fixed": "#2b1700",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#cfe5ff",
+                        "surface-container-low": "#f2f3f9",
+                        "on-surface": "#191c20",
+                        "background": "#F5F7FA",
+                        "text-muted": "#7F8C9A",
+                        "on-background": "#191c20",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#047240",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-fixed": "#00210f",
+                        "primary-fixed-dim": "#9acbff",
+                        "inverse-primary": "#9acbff",
+                        "surface-dim": "#d8dadf",
+                        "outline-variant": "#c0c7d1",
+                        "on-tertiary-container": "#ffe3c8",
+                        "tertiary-container": "#945b00",
+                        "primary": "#005387",
+                        "secondary-fixed": "#9af6b8",
+                        "success-light": "#EBF7EF",
+                        "tertiary-fixed": "#ffddba"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "3xl": "64px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "screen-edge": "20px",
+                        "2xl": "48px",
+                        "md": "16px",
+                        "card-gap": "12px",
+                        "section-v": "24px",
+                        "lg": "24px",
+                        "form-gap": "16px",
+                        "sm": "8px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "button-label": ["Be Vietnam Pro"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "code-mono": ["monospace"],
+                        "body-main": ["Be Vietnam Pro"],
+                        "price-display": ["Plus Jakarta Sans"],
+                        "body-secondary": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "h1": ["28px", { "lineHeight": "1.2", "letterSpacing": "-0.3px", "fontWeight": "800" }],
+                        "h2": ["22px", { "lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "700" }],
+                        "button-label": ["15px", { "lineHeight": "1", "fontWeight": "700" }],
+                        "h3": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "code-mono": ["13px", { "lineHeight": "1", "fontWeight": "400" }],
+                        "body-main": ["15px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "price-display": ["20px", { "lineHeight": "1", "fontWeight": "700" }],
+                        "body-secondary": ["13px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-text-main pb-[80px]">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-slate-900 shadow-sm border-b border-slate-100 dark:border-slate-800 flex items-center justify-between px-5 h-16 w-full sticky top-0 z-40 docked full-width top-0">
+<div class="flex items-center gap-sm">
+<img alt="Avatar" class="w-10 h-10 rounded-full border-2 border-warning" data-alt="Portrait of a smiling African farmer wearing a straw hat in a sunny field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQaSWIjmhejti0xHJNsMnDhVrrARnf--u6qSmJk2if9I9UW9f9DNrKQbSLQ3JGO8HjCfeY_VExIhw-znrsu9LTTypibUlzVJDz9G6vSNsOE_utjoP8kofuI7FrgrsMS1acUPIGhEgrn1AXDRS2o3dVL-AXN1bAjdeULgJv57VppMqP5O67hJCmtRIlhThiuR2lDNCkRUAWM-AVnHXW_kuusNFewLgMmOr0XJ56BPSiGQQG4ajqqRzFCXusLzF81eX4R7QKprS_zrg"/>
+<div class="flex flex-col">
+<span class="font-body-secondary text-body-secondary text-text-muted">Bonjour,</span>
+<span class="font-h3 text-h3 text-text-main">Jean 👋</span>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button aria-label="Recherche" class="text-[#1B6CA8] dark:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800 p-2 rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button aria-label="Notifications" class="text-[#1B6CA8] dark:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800 p-2 rounded-full active:scale-95 transition-transform relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+</div>
+</header>
+<main class="px-screen-edge py-section-v flex flex-col gap-section-v">
+<!-- KYC Banner -->
+<div class="bg-warning-light rounded-xl p-md flex items-start gap-sm shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+<span class="material-symbols-outlined text-warning mt-1" data-icon="warning">warning</span>
+<div class="flex-1">
+<h3 class="font-h3 text-h3 text-text-main mb-xs">Vérifiez votre identité</h3>
+<p class="font-body-secondary text-body-secondary text-text-muted mb-sm">Pour publier des offres et vendre, veuillez compléter votre profil.</p>
+<button class="font-button-label text-button-label text-warning hover:underline active:scale-97 transition-transform">Vérifier maintenant</button>
+</div>
+</div>
+<!-- Scrollable Stats -->
+<section>
+<div class="flex gap-card-gap overflow-x-auto pb-4 snap-x hide-scrollbar">
+<div class="min-w-[140px] bg-white rounded-xl p-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] snap-start">
+<span class="font-body-secondary text-body-secondary text-text-muted block mb-xs">Missions actives</span>
+<span class="font-h2 text-h2 text-text-main">3</span>
+</div>
+<div class="min-w-[140px] bg-white rounded-xl p-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] snap-start">
+<span class="font-body-secondary text-body-secondary text-text-muted block mb-xs">Candidatures</span>
+<span class="font-h2 text-h2 text-text-main">12</span>
+</div>
+<div class="min-w-[140px] bg-white rounded-xl p-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] snap-start">
+<span class="font-body-secondary text-body-secondary text-text-muted block mb-xs">Revenus estimés</span>
+<span class="font-h2 text-h2 text-primary-container">45 000 <span class="font-body-secondary text-body-secondary">FCFA</span></span>
+</div>
+</div>
+</section>
+<!-- Quick Actions (Bento Grid Style) -->
+<section class="grid grid-cols-2 gap-card-gap">
+<button class="bg-primary-container text-on-primary rounded-xl p-md flex flex-col items-center justify-center gap-sm h-[100px] shadow-[0_2px_8px_rgba(0,0,0,0.08)] active:scale-97 transition-transform">
+<span class="material-symbols-outlined" data-icon="post_add">post_add</span>
+<span class="font-button-label text-button-label text-center">Publier une offre</span>
+</button>
+<button class="bg-success text-on-primary rounded-xl p-md flex flex-col items-center justify-center gap-sm h-[100px] shadow-[0_2px_8px_rgba(0,0,0,0.08)] active:scale-97 transition-transform">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-button-label text-button-label text-center">Vendre produits</span>
+</button>
+<button class="bg-white rounded-xl p-md flex flex-col items-center justify-center gap-sm h-[100px] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-border active:scale-97 transition-transform">
+<span class="material-symbols-outlined text-primary-container" data-icon="group">group</span>
+<span class="font-button-label text-button-label text-text-main text-center">Mes travailleurs</span>
+</button>
+<button class="bg-white rounded-xl p-md flex flex-col items-center justify-center gap-sm h-[100px] shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-border active:scale-97 transition-transform">
+<span class="material-symbols-outlined text-primary-container" data-icon="receipt_long">receipt_long</span>
+<span class="font-button-label text-button-label text-text-main text-center">Mes commandes</span>
+</button>
+</section>
+<!-- Nearby Workers -->
+<section>
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-h2 text-h2 text-text-main uppercase tracking-wider text-[14px]">Travailleurs proches</h2>
+<span class="bg-primary-fixed text-on-primary-fixed-variant font-body-secondary text-[11px] px-2 py-1 rounded-full font-bold">8 disponibles</span>
+</div>
+<div class="flex gap-card-gap overflow-x-auto pb-4 snap-x hide-scrollbar">
+<!-- Worker Card 1 -->
+<div class="min-w-[240px] bg-white rounded-xl p-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-border snap-start flex flex-col">
+<div class="flex items-start gap-sm mb-sm">
+<img alt="Worker" class="w-[48px] h-[48px] rounded-full border-2 border-success" data-alt="Portrait of a young African man looking focused" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAALn-YB1lyo0KRPahzJzBoCpPNHMVBa091NLIir6dzz8THeag_aLjSOUJsjDWima75sEa9JZLa27-UJjepKb7YKbfWORbN1kf4nnnTK4NtR0GJeDeRM2Z7eeFioMx7hRpb3LlkAZb2kcnGyGXC73pypvXR7yyDvk3mDbfrNXgGlzijo-iftOrqoikBxbO3u4vgMQsh0bs1NCcvmVOnJz367IsFjVsgyUQ02Q76ltKoSn2pfTOc6NkMTXEvnxZWJ7_56pI2hx9BXd0"/>
+<div class="flex-1">
+<h3 class="font-h3 text-h3 text-text-main text-[16px]">Kouamé M.</h3>
+<p class="font-body-secondary text-body-secondary text-text-muted">Récolte &amp; Plantation</p>
+</div>
+</div>
+<div class="flex items-center justify-between mb-md font-body-secondary text-body-secondary">
+<span class="flex items-center gap-1 text-warning"><span class="material-symbols-outlined text-[16px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span> 4.8</span>
+<span class="flex items-center gap-1 text-text-muted"><span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span> 2.3km</span>
+</div>
+<button class="mt-auto bg-primary-container text-on-primary font-button-label text-button-label h-[40px] rounded-lg w-full flex items-center justify-center active:scale-97 transition-transform">Contacter</button>
+</div>
+<!-- Worker Card 2 -->
+<div class="min-w-[240px] bg-white rounded-xl p-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-border snap-start flex flex-col">
+<div class="flex items-start gap-sm mb-sm">
+<img alt="Worker" class="w-[48px] h-[48px] rounded-full border-2 border-success" data-alt="Portrait of an African woman looking confident" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbmKm7jgxWtSgOlsy0XzBCNaJqQ6qKQMCp2LX6bO6furFM31HulfoOSrh29bBNg_G3AXRGvYRMNliA6qxK3103ye_lQflpf1td_EXT0PCBiFNWKZhbDIQ29jBA98CIxsvqc8aU0Afn6sxmbszFE8--yl07Y8Dqoo6JYQA7GIM_-ZNmzP_JT2kkbt5j7J3hA4dr-a806l2PhJumdWcNpZZ1EdzxMtXg3wgcR33Q2YW6nClOPBynX-GcMXHJEbP1hL4QLijWTkO4BD8"/>
+<div class="flex-1">
+<h3 class="font-h3 text-h3 text-text-main text-[16px]">Aya F.</h3>
+<p class="font-body-secondary text-body-secondary text-text-muted">Nettoyage terrain</p>
+</div>
+</div>
+<div class="flex items-center justify-between mb-md font-body-secondary text-body-secondary">
+<span class="flex items-center gap-1 text-warning"><span class="material-symbols-outlined text-[16px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span> 4.9</span>
+<span class="flex items-center gap-1 text-text-muted"><span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span> 5.1km</span>
+</div>
+<button class="mt-auto bg-primary-container text-on-primary font-button-label text-button-label h-[40px] rounded-lg w-full flex items-center justify-center active:scale-97 transition-transform">Contacter</button>
+</div>
+</div>
+</section>
+<!-- Recent Activity -->
+<section>
+<h2 class="font-h2 text-h2 text-text-main uppercase tracking-wider text-[14px] mb-md">Dernières activités</h2>
+<div class="bg-white rounded-xl p-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-border flex flex-col gap-md">
+<div class="flex gap-sm items-start">
+<div class="bg-success-light text-success p-2 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex-1 border-b border-border pb-md">
+<p class="font-body-main text-body-main text-text-main">Mission "Récolte Cacao" terminée par <strong>Kouamé M.</strong></p>
+<span class="font-body-secondary text-body-secondary text-text-muted">Il y a 2 heures</span>
+</div>
+</div>
+<div class="flex gap-sm items-start">
+<div class="bg-primary-fixed text-primary p-2 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]" data-icon="shopping_basket">shopping_basket</span>
+</div>
+<div class="flex-1">
+<p class="font-body-main text-body-main text-text-main">Nouvelle commande de <strong>50kg de Maïs</strong></p>
+<span class="font-body-secondary text-body-secondary text-text-muted">Hier, 14:30</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full h-[64px] z-50 flex justify-around items-center px-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] rounded-t-lg md:hidden">
+<a class="flex flex-col items-center justify-center text-[#1B6CA8] relative after:content-[''] after:absolute after:bottom-[-4px] after:w-1 after:h-1 after:bg-[#E8941A] after:rounded-full hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl active:scale-90 duration-200 ease-out p-2" href="#">
+<span class="material-symbols-outlined" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[10px] mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl active:scale-90 duration-200 ease-out p-2" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[10px] mt-1">Missions</span>
+</a>
+<!-- FAB placeholder in Nav -->
+<div class="relative w-[56px] h-[56px] -mt-6">
+<button class="absolute inset-0 bg-[#E8941A] text-white rounded-full flex items-center justify-center shadow-[0_4px_12px_rgba(232,148,26,0.4)] active:scale-90 transition-transform border-4 border-white">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<a class="flex flex-col items-center justify-center text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl active:scale-90 duration-200 ease-out p-2" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[10px] mt-1">Market</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl active:scale-90 duration-200 ease-out p-2" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[10px] mt-1">Profile</span>
+</a>
+</nav>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>
