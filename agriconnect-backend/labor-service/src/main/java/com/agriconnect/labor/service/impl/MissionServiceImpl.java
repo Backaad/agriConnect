@@ -29,7 +29,7 @@ public class MissionServiceImpl implements MissionService {
     @Override
     public MissionResponse createMission(MissionRequest request, String employerId) {
         Point location = geometryFactory.createPoint(new Coordinate(request.getLongitude(), request.getLatitude()));
-
+        
         Mission mission = Mission.builder()
                 .title(request.getTitle())
                 .description(request.getDescription())
@@ -38,7 +38,7 @@ public class MissionServiceImpl implements MissionService {
                 .location(location)
                 .status(MissionStatus.OPEN)
                 .build();
-
+        
         mission = missionRepository.save(mission);
         return mapToResponse(mission);
     }
@@ -48,7 +48,7 @@ public class MissionServiceImpl implements MissionService {
         Point workerLocation = geometryFactory.createPoint(new Coordinate(lon, lat));
         // Rough conversion: 1 degree is approx 111km
         double radiusInDegrees = radiusKm / 111.0;
-
+        
         return missionRepository.findMissionsWithinRadius(workerLocation, radiusInDegrees, MissionStatus.OPEN)
                 .stream()
                 .map(this::mapToResponse)
@@ -104,11 +104,11 @@ public class MissionServiceImpl implements MissionService {
     public MissionResponse completeMission(Long id, String employerId) {
         Mission mission = missionRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Mission not found"));
-
+        
         if (!mission.getEmployerId().equals(employerId)) {
             throw new RuntimeException("Unauthorized");
         }
-
+        
         mission.setStatus(MissionStatus.COMPLETED);
         return mapToResponse(missionRepository.save(mission));
     }

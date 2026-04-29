@@ -17,7 +17,7 @@ public class KycAdminController {
     public ResponseEntity<KycApplication> validateKycApplication(
             @PathVariable Long applicationId,
             @RequestParam boolean isApproved) {
-
+        
         KycApplication updatedApplication = kycSubmissionService.validateApplication(applicationId, isApproved);
         return ResponseEntity.ok(updatedApplication);
     }

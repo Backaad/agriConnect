@@ -20,7 +20,7 @@ public class OtpController {
     @PostMapping("/verify")
     public ResponseEntity<String> verifyOtp(@RequestBody OtpVerifyRequest request) {
         boolean isValid = otpService.verifyOtp(request.getPhoneNumber(), request.getOtp());
-
+        
         if (isValid) {
             userRepository.findByPhoneNumber(request.getPhoneNumber()).ifPresent(user -> {
                 user.setStatus(UserStatus.ACTIVE);
@@ -28,7 +28,7 @@ public class OtpController {
             });
             return ResponseEntity.ok("OTP verified successfully. User is now active.");
         }
-
+        
         return ResponseEntity.badRequest().body("Invalid or expired OTP.");
     }
 }

@@ -58,7 +58,7 @@ public class ContractServiceImpl implements ContractService {
     public byte[] downloadContractPdf(Long contractId, String userId) {
         Contract contract = contractRepository.findById(contractId)
                 .orElseThrow(() -> new RuntimeException("Contract not found"));
-
+                
         if (!contract.getApplication().getMission().getEmployerId().equals(userId) &&
             !contract.getApplication().getWorkerId().equals(userId)) {
             throw new RuntimeException("Unauthorized");
@@ -84,7 +84,7 @@ public class ContractServiceImpl implements ContractService {
             document.add(new Paragraph("Salary: " + contract.getApplication().getMission().getSalary() + " EUR"));
             document.add(new Paragraph("Status: SIGNED"));
             document.add(new Paragraph("Date: " + java.time.LocalDate.now().toString()));
-
+            
             document.add(new Paragraph("\nConditions: This digital contract serves as an agreement between the employer and the worker for the specified agricultural mission. Both parties have signed electronically."));
 
             document.close();

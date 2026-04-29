@@ -18,7 +18,7 @@ public class KycSubmissionController {
     public ResponseEntity<KycApplication> submitCni(
             @PathVariable Long userId,
             @RequestParam("file") MultipartFile cniFile) {
-
+        
         KycApplication application = kycSubmissionService.submitCni(userId, cniFile);
         return ResponseEntity.ok(application);
     }

@@ -45,7 +45,7 @@ public class ContractController {
                                                    @RequestHeader("Authorization") String token) {
         String userId = getUserId(token);
         byte[] pdfBytes = contractService.downloadContractPdf(id, userId);
-
+        
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"contract_" + id + ".pdf\"")
                 .contentType(MediaType.APPLICATION_PDF)

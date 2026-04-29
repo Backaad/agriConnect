@@ -23,7 +23,7 @@ public class MissionController {
     }
 
     @PostMapping
-    public ResponseEntity<MissionResponse> createMission(@RequestBody MissionRequest request,
+    public ResponseEntity<MissionResponse> createMission(@RequestBody MissionRequest request, 
                                                          @RequestHeader("Authorization") String token) {
         String employerId = getUserId(token);
         return ResponseEntity.ok(missionService.createMission(request, employerId));

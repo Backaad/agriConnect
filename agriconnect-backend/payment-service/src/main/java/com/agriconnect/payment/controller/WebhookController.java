@@ -17,7 +17,7 @@ public class WebhookController {
     @PostMapping("/tara")
     public ResponseEntity<String> handleTaraWebhook(@RequestBody Map<String, Object> payload) {
         // En conditions réelles, on vérifierait la signature du webhook ici.
-
+        
         String status = (String) payload.get("status");
         String transactionId = (String) payload.get("transaction_id");
 

@@ -110,7 +110,7 @@ public class EscrowServiceImpl implements EscrowService {
 
         if (success) {
             escrow.setStatus(EscrowStatus.RELEASED);
-
+            
             // Transaction pour le travailleur (réception)
             Transaction txWorker = Transaction.builder()
                     .userId(escrow.getWorkerId())
@@ -152,7 +152,7 @@ public class EscrowServiceImpl implements EscrowService {
 
         // Remboursement via Tara
         // taraApiService.refundToMobileMoney(...)
-
+        
         escrow.setStatus(EscrowStatus.REFUNDED);
         return escrowRepository.save(escrow);
     }

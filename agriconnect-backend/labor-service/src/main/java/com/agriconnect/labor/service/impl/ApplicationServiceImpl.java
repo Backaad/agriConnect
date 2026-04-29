@@ -25,7 +25,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     private final MissionRepository missionRepository;
     private final ContractRepository contractRepository;
 
-    public ApplicationServiceImpl(ApplicationRepository applicationRepository,
+    public ApplicationServiceImpl(ApplicationRepository applicationRepository, 
                                   MissionRepository missionRepository,
                                   ContractRepository contractRepository) {
         this.applicationRepository = applicationRepository;
@@ -37,7 +37,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     public ApplicationResponse applyForMission(ApplyRequest request, String workerId) {
         Mission mission = missionRepository.findById(request.getMissionId())
                 .orElseThrow(() -> new RuntimeException("Mission not found"));
-
+        
         if (mission.getStatus() != MissionStatus.OPEN) {
             throw new RuntimeException("Mission is not open for applications");
         }
@@ -47,7 +47,7 @@ public class ApplicationServiceImpl implements ApplicationService {
                 .workerId(workerId)
                 .status(ApplicationStatus.PENDING)
                 .build();
-
+                
         return mapToResponse(applicationRepository.save(application));
     }
 
@@ -56,25 +56,25 @@ public class ApplicationServiceImpl implements ApplicationService {
     public ApplicationResponse acceptApplication(Long applicationId, String employerId) {
         Application application = applicationRepository.findById(applicationId)
                 .orElseThrow(() -> new RuntimeException("Application not found"));
-
+                
         if (!application.getMission().getEmployerId().equals(employerId)) {
             throw new RuntimeException("Unauthorized");
         }
-
+        
         application.setStatus(ApplicationStatus.ACCEPTED);
         application = applicationRepository.save(application);
-
+        
         Mission mission = application.getMission();
         mission.setStatus(MissionStatus.IN_PROGRESS);
         missionRepository.save(mission);
-
+        
         // Auto-generate pending contract
         Contract contract = Contract.builder()
                 .application(application)
                 .status(ContractStatus.PENDING_SIGNATURE)
                 .build();
         contractRepository.save(contract);
-
+        
         return mapToResponse(application);
     }
 
@@ -82,11 +82,11 @@ public class ApplicationServiceImpl implements ApplicationService {
     public ApplicationResponse rejectApplication(Long applicationId, String employerId) {
         Application application = applicationRepository.findById(applicationId)
                 .orElseThrow(() -> new RuntimeException("Application not found"));
-
+                
         if (!application.getMission().getEmployerId().equals(employerId)) {
             throw new RuntimeException("Unauthorized");
         }
-
+        
         application.setStatus(ApplicationStatus.REJECTED);
         return mapToResponse(applicationRepository.save(application));
     }
@@ -103,11 +103,11 @@ public class ApplicationServiceImpl implements ApplicationService {
     public List<ApplicationResponse> getMissionApplications(Long missionId, String employerId) {
         Mission mission = missionRepository.findById(missionId)
                 .orElseThrow(() -> new RuntimeException("Mission not found"));
-
+                
         if (!mission.getEmployerId().equals(employerId)) {
             throw new RuntimeException("Unauthorized");
         }
-
+        
         return applicationRepository.findByMissionId(missionId)
                 .stream()
                 .map(this::mapToResponse)

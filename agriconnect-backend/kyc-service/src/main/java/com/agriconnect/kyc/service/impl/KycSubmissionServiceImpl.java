@@ -28,12 +28,12 @@ public class KycSubmissionServiceImpl implements KycSubmissionService {
     @Override
     public KycApplication submitCni(Long userId, MultipartFile cniFile) {
         String fileName = "cni/" + userId + "/" + UUID.randomUUID() + "-" + cniFile.getOriginalFilename();
-
+        
         try {
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentLength(cniFile.getSize());
             metadata.setContentType(cniFile.getContentType());
-
+            
             s3Client.putObject(new PutObjectRequest(bucketName, fileName, cniFile.getInputStream(), metadata));
         } catch (IOException e) {
             throw new RuntimeException("Failed to upload CNI to S3", e);

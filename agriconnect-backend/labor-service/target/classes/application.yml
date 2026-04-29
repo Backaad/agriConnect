@@ -15,7 +15,7 @@ spring:
         format_sql: true
     show-sql: true
     open-in-view: false
-
+  
 server:
   port: ${SERVER_PORT:8084}
 
