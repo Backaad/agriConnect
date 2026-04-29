@@ -1,4 +1,4 @@
-package com.agriconnect.geo;
+package com.agriconnect.apigateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,9 +6,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class GeoServiceApplication {
+public class ApiGatewayApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GeoServiceApplication.class, args);
+        SpringApplication.run(ApiGatewayApplication.class, args);
     }
 }
