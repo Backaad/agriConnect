@@ -1,0 +1,9 @@
+spring:
+  jpa:
+    show-sql: true
+mtn-momo:
+  enabled: false
+orange-money:
+  enabled: false
+campay:
+  enabled: false

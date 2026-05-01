@@ -1,0 +1,91 @@
+server:
+  port: 8086
+  servlet:
+    context-path: /api/v1
+
+spring:
+  application:
+    name: payment-service
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:agriconnect_payments}
+    username: ${DB_USERNAME:agri_user}
+    password: ${DB_PASSWORD:agri_pass}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 5000ms
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+    consumer:
+      group-id: payment-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.agriconnect.*"
+
+jwt:
+  secret: ${JWT_SECRET:bXlTdXBlclNlY3JldEtleUZvckFncmlDb25uZWN0QXBwbGljYXRpb24yMDI2}
+
+payment:
+  platform-fee-percent: 3.0
+  escrow-timeout-hours: 72
+  withdrawal-fee-percent: 1.5
+  max-topup-fcfa: 5000000
+  max-withdrawal-fcfa: 2000000
+
+mtn-momo:
+  base-url: ${MTN_MOMO_BASE_URL:https://sandbox.momodeveloper.mtn.com}
+  api-key: ${MTN_MOMO_API_KEY:test-key}
+  subscription-key: ${MTN_MOMO_SUBSCRIPTION_KEY:test-sub-key}
+  target-environment: ${MTN_MOMO_ENVIRONMENT:sandbox}
+  callback-url: ${MTN_MOMO_CALLBACK_URL:http://localhost:8086/api/v1/webhooks/mtn}
+  enabled: ${MTN_MOMO_ENABLED:false}
+
+orange-money:
+  base-url: ${ORANGE_MONEY_BASE_URL:https://api.orange.com}
+  client-id: ${ORANGE_MONEY_CLIENT_ID:test-id}
+  client-secret: ${ORANGE_MONEY_CLIENT_SECRET:test-secret}
+  merchant-key: ${ORANGE_MONEY_MERCHANT_KEY:test-merchant}
+  callback-url: ${ORANGE_MONEY_CALLBACK_URL:http://localhost:8086/api/v1/webhooks/orange}
+  enabled: ${ORANGE_MONEY_ENABLED:false}
+
+campay:
+  base-url: ${CAMPAY_BASE_URL:https://demo.campay.net}
+  app-username: ${CAMPAY_APP_USERNAME:test-user}
+  app-password: ${CAMPAY_APP_PASSWORD:test-pass}
+  callback-url: ${CAMPAY_CALLBACK_URL:http://localhost:8086/api/v1/webhooks/campay}
+  enabled: ${CAMPAY_ENABLED:false}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.agriconnect: DEBUG
+    org.springframework.kafka: INFO

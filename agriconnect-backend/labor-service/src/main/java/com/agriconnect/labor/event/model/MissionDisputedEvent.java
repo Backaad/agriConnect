@@ -1,0 +1,17 @@
+package com.agriconnect.labor.event.model;
+
+import lombok.*;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
+public class MissionDisputedEvent {
+    private UUID missionId;
+    private UUID contractId;
+    private UUID farmerId;
+    private UUID workerId;
+    private UUID reporterId;
+    private String reason;
+    @Builder.Default
+    private LocalDateTime occurredAt = LocalDateTime.now();
+}

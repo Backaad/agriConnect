@@ -4,61 +4,71 @@ import com.agriconnect.payment.domain.enums.EscrowStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "escrows")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class Escrow {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "mission_id", nullable = false)
-    private Long missionId;
-
-    @Column(name = "farmer_id", nullable = false)
-    private Long farmerId;
-
-    @Column(name = "worker_id", nullable = false)
-    private Long workerId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(columnDefinition = "uuid", updatable = false)
+    private UUID id;
 
     @Column(nullable = false)
-    private BigDecimal amount; // Montant total payé par l'agriculteur
+    private UUID referenceId;
+
+    @Column(nullable = false, length = 30)
+    private String referenceType;
 
     @Column(nullable = false)
-    private BigDecimal commission; // Commission prélevée (3 à 5%)
+    private UUID payerId;
 
-    @Column(name = "worker_amount", nullable = false)
-    private BigDecimal workerAmount; // Montant à transférer au travailleur (amount - commission)
+    @Column(nullable = false)
+    private UUID payeeId;
+
+    @Column(nullable = false)
+    private Long amountFcfa;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private Long platformFee = 0L;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    @Builder.Default
+    private EscrowStatus status = EscrowStatus.LOCKED;
+
+    @Column(nullable = false, updatable = false)
+    @Builder.Default
+    private LocalDateTime lockedAt = LocalDateTime.now();
+
+    @Column
+    private LocalDateTime releasedAt;
+
+    @Column
+    private LocalDateTime refundedAt;
+
     @Column(nullable = false)
-    private EscrowStatus status;
+    private LocalDateTime expiresAt;
 
-    @Column(name = "tara_transaction_id")
-    private String taraTransactionId; // ID de transaction renvoyé par Tara API
+    @Column(columnDefinition = "TEXT")
+    private String releaseReason;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    @Column(nullable = false, updatable = false)
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    @Column(nullable = false)
+    @Builder.Default
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
+    public boolean isLocked()   { return status == EscrowStatus.LOCKED; }
+    public boolean isExpired()  { return LocalDateTime.now().isAfter(expiresAt); }
 
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
+    public long getNetPayeeAmount() {
+        return amountFcfa - platformFee;
     }
 }

@@ -1,0 +1,12 @@
+firebase:
+  enabled: true
+twilio:
+  enabled: true
+sendgrid:
+  enabled: true
+spring:
+  jpa:
+    show-sql: false
+logging:
+  level:
+    com.agriconnect: INFO

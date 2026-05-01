@@ -1,28 +1,15 @@
 package com.agriconnect.payment.service;
 
-import com.agriconnect.payment.domain.entity.Escrow;
+import com.agriconnect.payment.dto.request.EscrowLockRequest;
+import com.agriconnect.payment.dto.request.EscrowReleaseRequest;
+import com.agriconnect.payment.dto.response.EscrowResponse;
 
-import java.math.BigDecimal;
+import java.util.UUID;
 
 public interface EscrowService {
-
-    /**
-     * Initie un paiement avec mise en séquestre via l'API Tara.
-     */
-    Escrow initiateEscrow(Long missionId, Long farmerId, Long workerId, BigDecimal amount);
-
-    /**
-     * Valide la mission et transfère les fonds du séquestre au travailleur.
-     */
-    Escrow releaseEscrow(Long escrowId);
-
-    /**
-     * Annule la mission et rembourse l'agriculteur.
-     */
-    Escrow refundEscrow(Long escrowId);
-
-    /**
-     * Confirme le dépôt suite au Webhook de Tara.
-     */
-    Escrow confirmTaraDeposit(String taraTransactionId);
+    EscrowResponse lock(EscrowLockRequest request);
+    EscrowResponse release(EscrowReleaseRequest request);
+    EscrowResponse refund(UUID referenceId, String reason);
+    EscrowResponse getByReference(UUID referenceId);
+    void expireOldEscrows();
 }

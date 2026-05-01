@@ -1,24 +1,64 @@
+server:
+  port: 8084
+  servlet:
+    context-path: /api/v1
+
 spring:
   application:
     name: labor-service
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:agriconnect_labor}
-    username: ${DB_USER:postgres}
-    password: ${DB_PASSWORD:postgres}
+    username: ${DB_USERNAME:agri_user}
+    password: ${DB_PASSWORD:agri_pass}
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
-        dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
-        format_sql: true
-    show-sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
-  
-server:
-  port: ${SERVER_PORT:8084}
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+    consumer:
+      group-id: labor-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.agriconnect.*"
 
 jwt:
-  secret: ${JWT_SECRET}
-  expiration: ${JWT_EXPIRATION:86400000} # 1 day in ms
+  secret: ${JWT_SECRET:bXlTdXBlclNlY3JldEtleUZvckFncmlDb25uZWN0QXBwbGljYXRpb24yMDI2}
+
+services:
+  user:
+    url: ${USER_SERVICE_URL:http://user-service:8082}
+  payment:
+    url: ${PAYMENT_SERVICE_URL:http://payment-service:8086}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.agriconnect: DEBUG

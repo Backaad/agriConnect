@@ -5,38 +5,38 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
-@Table(name = "applications")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Table(name = "applications",
+    uniqueConstraints = @UniqueConstraint(columnNames = {"job_id", "worker_id"}))
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class Application {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(columnDefinition = "uuid", updatable = false)
+    private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mission_id", nullable = false)
-    private Mission mission;
+    @JoinColumn(name = "job_id", nullable = false)
+    private JobOffer job;
 
-    @Column(name = "worker_id", nullable = false)
-    private String workerId;
+    @Column(nullable = false)
+    private UUID workerId;
+
+    @Column(columnDefinition = "TEXT")
+    private String coverNote;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private ApplicationStatus status;
+    @Column(nullable = false, length = 30)
+    @Builder.Default
+    private ApplicationStatus status = ApplicationStatus.PENDING;
 
-    @Column(name = "applied_at", nullable = false, updatable = false)
-    private LocalDateTime appliedAt;
+    @Column(nullable = false, updatable = false)
+    @Builder.Default
+    private LocalDateTime appliedAt = LocalDateTime.now();
 
-    @PrePersist
-    protected void onCreate() {
-        appliedAt = LocalDateTime.now();
-        if (status == null) {
-            status = ApplicationStatus.PENDING;
-        }
-    }
+    @Column
+    private LocalDateTime reviewedAt;
 }

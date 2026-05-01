@@ -1,0 +1,9 @@
+firebase:
+  enabled: false
+twilio:
+  enabled: false
+sendgrid:
+  enabled: false
+spring:
+  jpa:
+    show-sql: true

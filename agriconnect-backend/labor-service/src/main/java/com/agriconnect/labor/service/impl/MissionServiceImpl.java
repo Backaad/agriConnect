@@ -1,129 +1,171 @@
 package com.agriconnect.labor.service.impl;
 
+import com.agriconnect.commons.dto.PageResponse;
+import com.agriconnect.commons.exception.BusinessException;
+import com.agriconnect.commons.exception.ForbiddenException;
+import com.agriconnect.commons.exception.NotFoundException;
 import com.agriconnect.labor.domain.entity.Mission;
 import com.agriconnect.labor.domain.enums.MissionStatus;
-import com.agriconnect.labor.dto.request.MissionRequest;
+import com.agriconnect.labor.dto.request.CompleteMissionRequest;
+import com.agriconnect.labor.dto.request.DisputeRequest;
 import com.agriconnect.labor.dto.response.MissionResponse;
+import com.agriconnect.labor.event.model.MissionCompletedEvent;
+import com.agriconnect.labor.event.model.MissionDisputedEvent;
+import com.agriconnect.labor.event.publisher.LaborEventPublisher;
+import com.agriconnect.labor.mapper.LaborMapper;
 import com.agriconnect.labor.repository.MissionRepository;
 import com.agriconnect.labor.service.MissionService;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Point;
-import org.locationtech.jts.geom.PrecisionModel;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class MissionServiceImpl implements MissionService {
 
     private final MissionRepository missionRepository;
-    private final GeometryFactory geometryFactory;
+    private final LaborMapper laborMapper;
+    private final LaborEventPublisher eventPublisher;
 
-    public MissionServiceImpl(MissionRepository missionRepository) {
-        this.missionRepository = missionRepository;
-        this.geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
+    @Override
+    @Transactional(readOnly = true)
+    public MissionResponse getById(UUID id, UUID requesterId) {
+        Mission mission = findMissionById(id);
+        checkAccess(mission, requesterId);
+        return laborMapper.toMissionResponse(mission);
     }
 
     @Override
-    public MissionResponse createMission(MissionRequest request, String employerId) {
-        Point location = geometryFactory.createPoint(new Coordinate(request.getLongitude(), request.getLatitude()));
-        
-        Mission mission = Mission.builder()
-                .title(request.getTitle())
-                .description(request.getDescription())
-                .salary(request.getSalary())
-                .employerId(employerId)
-                .location(location)
-                .status(MissionStatus.OPEN)
-                .build();
-        
+    @Transactional
+    public MissionResponse startMission(UUID missionId, UUID farmerId) {
+        Mission mission = findMissionById(missionId);
+        if (!mission.getFarmerId().equals(farmerId)) {
+            throw new ForbiddenException("Seul l'agriculteur peut démarrer la mission");
+        }
+        if (mission.getStatus() != MissionStatus.SCHEDULED) {
+            throw new BusinessException("La mission ne peut pas être démarrée dans son état actuel");
+        }
+        mission.setStatus(MissionStatus.IN_PROGRESS);
+        mission.setStartedAt(LocalDateTime.now());
+        mission.setUpdatedAt(LocalDateTime.now());
         mission = missionRepository.save(mission);
-        return mapToResponse(mission);
+        log.info("Mission démarrée: id={}", missionId);
+        return laborMapper.toMissionResponse(mission);
     }
 
     @Override
-    public List<MissionResponse> findMissionsWithinRadius(double lat, double lon, double radiusKm) {
-        Point workerLocation = geometryFactory.createPoint(new Coordinate(lon, lat));
-        // Rough conversion: 1 degree is approx 111km
-        double radiusInDegrees = radiusKm / 111.0;
-        
-        return missionRepository.findMissionsWithinRadius(workerLocation, radiusInDegrees, MissionStatus.OPEN)
-                .stream()
-                .map(this::mapToResponse)
-                .collect(Collectors.toList());
-    }
+    @Transactional
+    public MissionResponse validateCompletion(UUID missionId, UUID requesterId, CompleteMissionRequest request) {
+        Mission mission = findMissionById(missionId);
+        checkAccess(mission, requesterId);
 
-    @Override
-    public List<MissionResponse> getEmployerMissions(String employerId) {
-        return missionRepository.findByEmployerId(employerId)
-                .stream()
-                .map(this::mapToResponse)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public MissionResponse getMissionById(Long id) {
-        return mapToResponse(missionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Mission not found")));
-    }
-
-    @Override
-    public MissionResponse updateMission(Long id, MissionRequest request, String employerId) {
-        Mission mission = missionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Mission not found"));
-
-        if (!mission.getEmployerId().equals(employerId)) {
-            throw new RuntimeException("Unauthorized");
+        if (mission.getStatus() != MissionStatus.IN_PROGRESS
+                && mission.getStatus() != MissionStatus.COMPLETED) {
+            throw new BusinessException("La mission ne peut pas être validée dans son état actuel");
         }
 
-        mission.setTitle(request.getTitle());
-        mission.setDescription(request.getDescription());
-        mission.setSalary(request.getSalary());
+        boolean isFarmer = mission.getFarmerId().equals(requesterId);
+        boolean isWorker = mission.getWorkerId().equals(requesterId);
+        LocalDateTime now = LocalDateTime.now();
 
-        Point location = geometryFactory.createPoint(new Coordinate(request.getLongitude(), request.getLatitude()));
-        mission.setLocation(location);
-
-        return mapToResponse(missionRepository.save(mission));
-    }
-
-    @Override
-    public void deleteMission(Long id, String employerId) {
-        Mission mission = missionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Mission not found"));
-
-        if (!mission.getEmployerId().equals(employerId)) {
-            throw new RuntimeException("Unauthorized");
+        if (isFarmer) {
+            if (mission.getFarmerValidatedAt() != null) throw new BusinessException("Vous avez déjà validé cette mission");
+            mission.setFarmerValidatedAt(now);
+            mission.setFarmerRating(request.getRating());
+            mission.setFarmerReview(request.getReview());
+        }
+        if (isWorker) {
+            if (mission.getWorkerValidatedAt() != null) throw new BusinessException("Vous avez déjà validé cette mission");
+            mission.setWorkerValidatedAt(now);
+            mission.setWorkerRating(request.getRating());
+            mission.setWorkerReview(request.getReview());
         }
 
-        missionRepository.delete(mission);
-    }
-
-    @Override
-    public MissionResponse completeMission(Long id, String employerId) {
-        Mission mission = missionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Mission not found"));
-        
-        if (!mission.getEmployerId().equals(employerId)) {
-            throw new RuntimeException("Unauthorized");
-        }
-        
         mission.setStatus(MissionStatus.COMPLETED);
-        return mapToResponse(missionRepository.save(mission));
+        mission.setUpdatedAt(now);
+
+        if (mission.isFullyValidated()) {
+            mission.setStatus(MissionStatus.VALIDATED);
+            mission.setCompletedAt(now);
+
+            // Publier événement → libérer l'escrow
+            eventPublisher.publishMissionCompleted(MissionCompletedEvent.builder()
+                    .missionId(mission.getId())
+                    .contractId(mission.getContract().getId())
+                    .farmerId(mission.getFarmerId())
+                    .workerId(mission.getWorkerId())
+                    .amountFcfa(mission.getContract().getAmountFcfa())
+                    .build());
+
+            log.info("Mission validée par les deux parties et paiement libéré: id={}", missionId);
+        }
+
+        mission = missionRepository.save(mission);
+        return laborMapper.toMissionResponse(mission);
     }
 
-    private MissionResponse mapToResponse(Mission mission) {
-        return MissionResponse.builder()
-                .id(mission.getId())
-                .title(mission.getTitle())
-                .description(mission.getDescription())
-                .salary(mission.getSalary())
-                .employerId(mission.getEmployerId())
-                .latitude(mission.getLocation().getY())
-                .longitude(mission.getLocation().getX())
-                .status(mission.getStatus())
-                .createdAt(mission.getCreatedAt())
-                .build();
+    @Override
+    @Transactional
+    public MissionResponse openDispute(UUID missionId, UUID requesterId, DisputeRequest request) {
+        Mission mission = findMissionById(missionId);
+        checkAccess(mission, requesterId);
+
+        if (mission.getStatus() != MissionStatus.IN_PROGRESS
+                && mission.getStatus() != MissionStatus.COMPLETED) {
+            throw new BusinessException("Un litige ne peut être ouvert que sur une mission en cours ou terminée");
+        }
+
+        mission.setStatus(MissionStatus.DISPUTED);
+        mission.setDisputeReason(request.getReason());
+        mission.setUpdatedAt(LocalDateTime.now());
+        mission = missionRepository.save(mission);
+
+        eventPublisher.publishMissionDisputed(MissionDisputedEvent.builder()
+                .missionId(mission.getId())
+                .contractId(mission.getContract().getId())
+                .farmerId(mission.getFarmerId())
+                .workerId(mission.getWorkerId())
+                .reason(request.getReason())
+                .reporterId(requesterId)
+                .build());
+
+        log.info("Litige ouvert sur mission: id={} par userId={}", missionId, requesterId);
+        return laborMapper.toMissionResponse(mission);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PageResponse<MissionResponse> getMyMissions(UUID userId, String role, String status, Pageable pageable) {
+        Page<Mission> page;
+        MissionStatus ms = status != null ? MissionStatus.valueOf(status.toUpperCase()) : null;
+
+        if ("FARMER".equalsIgnoreCase(role)) {
+            page = ms != null
+                    ? missionRepository.findByFarmerIdAndStatus(userId, ms, pageable)
+                    : missionRepository.findByFarmerId(userId, pageable);
+        } else {
+            page = ms != null
+                    ? missionRepository.findByWorkerIdAndStatus(userId, ms, pageable)
+                    : missionRepository.findByWorkerId(userId, pageable);
+        }
+        return PageResponse.from(page.map(laborMapper::toMissionResponse));
+    }
+
+    private Mission findMissionById(UUID id) {
+        return missionRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Mission", id.toString()));
+    }
+
+    private void checkAccess(Mission mission, UUID userId) {
+        if (!mission.getFarmerId().equals(userId) && !mission.getWorkerId().equals(userId)) {
+            throw new ForbiddenException("Accès à la mission refusé");
+        }
     }
 }

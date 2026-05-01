@@ -1,0 +1,294 @@
+version: '3.9'
+
+networks:
+  agriconnect-net:
+    driver: bridge
+
+volumes:
+  postgres_auth_data:
+  postgres_users_data:
+  postgres_labor_data:
+  redis_data:
+
+services:
+
+  # ─── Infrastructure ──────────────────────────────────────────
+
+  postgres-auth:
+    image: postgis/postgis:16-3.4-alpine
+    container_name: agri-postgres-auth
+    environment:
+      POSTGRES_DB:       ${DB_NAME_AUTH:-agriconnect_auth}
+      POSTGRES_USER:     ${DB_USERNAME:-agri_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-agri_pass}
+    volumes:
+      - postgres_auth_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - agriconnect-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agri_user -d agriconnect_auth"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres-users:
+    image: postgis/postgis:16-3.4-alpine
+    container_name: agri-postgres-users
+    environment:
+      POSTGRES_DB:       ${DB_NAME_USERS:-agriconnect_users}
+      POSTGRES_USER:     ${DB_USERNAME:-agri_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-agri_pass}
+    volumes:
+      - postgres_users_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+    networks:
+      - agriconnect-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agri_user -d agriconnect_users"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres-labor:
+    image: postgis/postgis:16-3.4-alpine
+    container_name: agri-postgres-labor
+    environment:
+      POSTGRES_DB:       ${DB_NAME_LABOR:-agriconnect_labor}
+      POSTGRES_USER:     ${DB_USERNAME:-agri_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-agri_pass}
+    volumes:
+      - postgres_labor_data:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+    networks:
+      - agriconnect-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agri_user -d agriconnect_labor"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: agri-redis
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - agriconnect-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.1
+    container_name: agri-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - agriconnect-net
+
+  kafka:
+    image: confluentinc/cp-kafka:7.6.1
+    container_name: agri-kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    ports:
+      - "29092:29092"
+    networks:
+      - agriconnect-net
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: agri-kafka-ui
+    depends_on:
+      - kafka
+    ports:
+      - "8090:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+    networks:
+      - agriconnect-net
+
+  # ─── Microservices ────────────────────────────────────────────
+
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    container_name: agri-auth
+    depends_on:
+      postgres-auth:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DB_HOST: postgres-auth
+      DB_NAME: ${DB_NAME_AUTH:-agriconnect_auth}
+      DB_USERNAME: ${DB_USERNAME:-agri_user}
+      DB_PASSWORD: ${DB_PASSWORD:-agri_pass}
+      REDIS_HOST: redis
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      JWT_SECRET: ${JWT_SECRET}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID:-ACtest}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN:-test}
+      TWILIO_FROM_NUMBER: ${TWILIO_FROM_NUMBER:-+15005550006}
+      TWILIO_ENABLED: ${TWILIO_ENABLED:-false}
+    ports:
+      - "8081:8081"
+    networks:
+      - agriconnect-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8081/api/v1/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    container_name: agri-user
+    depends_on:
+      postgres-users:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      auth-service:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DB_HOST: postgres-users
+      DB_NAME: ${DB_NAME_USERS:-agriconnect_users}
+      DB_USERNAME: ${DB_USERNAME:-agri_user}
+      DB_PASSWORD: ${DB_PASSWORD:-agri_pass}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      JWT_SECRET: ${JWT_SECRET}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-dev}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-dev}
+      AWS_S3_BUCKET: ${AWS_S3_BUCKET:-agriconnect-storage}
+      AWS_S3_REGION: ${AWS_S3_REGION:-eu-west-1}
+    ports:
+      - "8082:8082"
+    networks:
+      - agriconnect-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8082/api/v1/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  labor-service:
+    build:
+      context: ./labor-service
+      dockerfile: Dockerfile
+    container_name: agri-labor
+    depends_on:
+      postgres-labor:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      user-service:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DB_HOST: postgres-labor
+      DB_NAME: ${DB_NAME_LABOR:-agriconnect_labor}
+      DB_USERNAME: ${DB_USERNAME:-agri_user}
+      DB_PASSWORD: ${DB_PASSWORD:-agri_pass}
+      REDIS_HOST: redis
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      JWT_SECRET: ${JWT_SECRET}
+      USER_SERVICE_URL: http://user-service:8082
+      PAYMENT_SERVICE_URL: http://payment-service:8086
+    ports:
+      - "8084:8084"
+    networks:
+      - agriconnect-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8084/api/v1/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  postgres-notifications:
+    image: postgres:16-alpine
+    container_name: agri-postgres-notifications
+    environment:
+      POSTGRES_DB:       ${DB_NAME_NOTIFICATIONS:-agriconnect_notifications}
+      POSTGRES_USER:     ${DB_USERNAME:-agri_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-agri_pass}
+    ports:
+      - "5437:5432"
+    networks:
+      - agriconnect-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agri_user -d agriconnect_notifications"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  notification-service:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
+    container_name: agri-notification
+    depends_on:
+      postgres-notifications:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DB_HOST: postgres-notifications
+      DB_NAME: ${DB_NAME_NOTIFICATIONS:-agriconnect_notifications}
+      DB_USERNAME: ${DB_USERNAME:-agri_user}
+      DB_PASSWORD: ${DB_PASSWORD:-agri_pass}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      JWT_SECRET: ${JWT_SECRET}
+      FIREBASE_ENABLED: ${FIREBASE_ENABLED:-false}
+      FIREBASE_SERVICE_ACCOUNT_JSON: ${FIREBASE_SERVICE_ACCOUNT_JSON:-}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID:-ACtest}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN:-test}
+      TWILIO_FROM_NUMBER: ${TWILIO_FROM_NUMBER:-+15005550006}
+      TWILIO_ENABLED: ${TWILIO_ENABLED:-false}
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY:-SG.test}
+      SENDGRID_ENABLED: ${SENDGRID_ENABLED:-false}
+    ports:
+      - "8087:8087"
+    networks:
+      - agriconnect-net
+    restart: unless-stopped

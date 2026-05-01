@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+twilio:
+  enabled: false
+logging:
+  level:
+    com.agriconnect: DEBUG

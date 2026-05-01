@@ -1,79 +1,83 @@
 package com.agriconnect.labor.controller;
 
+import com.agriconnect.commons.dto.ApiResponse;
+import com.agriconnect.commons.dto.PageResponse;
 import com.agriconnect.labor.dto.request.CompleteMissionRequest;
-import com.agriconnect.labor.dto.request.MissionRequest;
+import com.agriconnect.labor.dto.request.DisputeRequest;
 import com.agriconnect.labor.dto.response.MissionResponse;
-import com.agriconnect.labor.security.JwtTokenProvider;
+import com.agriconnect.labor.security.SecurityUtils;
 import com.agriconnect.labor.service.MissionService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/labor/missions")
+@RequestMapping("/missions")
+@RequiredArgsConstructor
+@Tag(name = "Missions", description = "Suivi et validation des missions agricoles")
 public class MissionController {
 
     private final MissionService missionService;
-    private final JwtTokenProvider tokenProvider;
-
-    public MissionController(MissionService missionService, JwtTokenProvider tokenProvider) {
-        this.missionService = missionService;
-        this.tokenProvider = tokenProvider;
-    }
-
-    @PostMapping
-    public ResponseEntity<MissionResponse> createMission(@RequestBody MissionRequest request, 
-                                                         @RequestHeader("Authorization") String token) {
-        String employerId = getUserId(token);
-        return ResponseEntity.ok(missionService.createMission(request, employerId));
-    }
-
-    @GetMapping("/nearby")
-    public ResponseEntity<List<MissionResponse>> getNearbyMissions(@RequestParam double lat,
-                                                                   @RequestParam double lon,
-                                                                   @RequestParam double radius) {
-        return ResponseEntity.ok(missionService.findMissionsWithinRadius(lat, lon, radius));
-    }
-
-    @GetMapping("/employer")
-    public ResponseEntity<List<MissionResponse>> getEmployerMissions(@RequestHeader("Authorization") String token) {
-        String employerId = getUserId(token);
-        return ResponseEntity.ok(missionService.getEmployerMissions(employerId));
-    }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MissionResponse> getMission(@PathVariable Long id) {
-        return ResponseEntity.ok(missionService.getMissionById(id));
+    @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "Détail d'une mission", security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<ApiResponse<MissionResponse>> getById(@PathVariable UUID id) {
+        return ResponseEntity.ok(ApiResponse.success(
+                missionService.getById(id, SecurityUtils.getCurrentUserId())));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<MissionResponse> updateMission(@PathVariable Long id,
-                                                         @RequestBody MissionRequest request,
-                                                         @RequestHeader("Authorization") String token) {
-        String employerId = getUserId(token);
-        return ResponseEntity.ok(missionService.updateMission(id, request, employerId));
+    @PostMapping("/{id}/start")
+    @PreAuthorize("hasRole('FARMER')")
+    @Operation(summary = "Démarrer une mission", security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<ApiResponse<MissionResponse>> start(@PathVariable UUID id) {
+        return ResponseEntity.ok(ApiResponse.success(
+                missionService.startMission(id, SecurityUtils.getCurrentUserId()),
+                "Mission démarrée"));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMission(@PathVariable Long id,
-                                              @RequestHeader("Authorization") String token) {
-        String employerId = getUserId(token);
-        missionService.deleteMission(id, employerId);
-        return ResponseEntity.noContent().build();
+    @PostMapping("/{id}/validate")
+    @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "Valider la fin de mission (libère le paiement si les deux valident)",
+               security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<ApiResponse<MissionResponse>> validate(
+            @PathVariable UUID id,
+            @Valid @RequestBody CompleteMissionRequest req) {
+        return ResponseEntity.ok(ApiResponse.success(
+                missionService.validateCompletion(id, SecurityUtils.getCurrentUserId(), req),
+                "Validation enregistrée"));
     }
 
-    @PostMapping("/complete")
-    public ResponseEntity<MissionResponse> completeMission(@RequestBody CompleteMissionRequest request,
-                                                           @RequestHeader("Authorization") String token) {
-        String employerId = getUserId(token);
-        return ResponseEntity.ok(missionService.completeMission(request.getMissionId(), employerId));
+    @PostMapping("/{id}/dispute")
+    @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "Ouvrir un litige sur une mission", security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<ApiResponse<MissionResponse>> dispute(
+            @PathVariable UUID id,
+            @Valid @RequestBody DisputeRequest req) {
+        return ResponseEntity.ok(ApiResponse.success(
+                missionService.openDispute(id, SecurityUtils.getCurrentUserId(), req),
+                "Litige ouvert — notre équipe vous contactera sous 24h"));
     }
 
-    private String getUserId(String authHeader) {
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            return tokenProvider.getUserIdFromJWT(authHeader.substring(7));
-        }
-        throw new RuntimeException("Invalid token");
+    @GetMapping("/my")
+    @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "Mes missions (en tant que farmer ou worker)",
+               security = @SecurityRequirement(name = "bearerAuth"))
+    public ResponseEntity<ApiResponse<PageResponse<MissionResponse>>> getMyMissions(
+            @RequestParam(defaultValue = "WORKER") String role,
+            @RequestParam(required = false) String status,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size) {
+        return ResponseEntity.ok(ApiResponse.success(
+                missionService.getMyMissions(SecurityUtils.getCurrentUserId(), role, status,
+                        PageRequest.of(page, size))));
     }
 }

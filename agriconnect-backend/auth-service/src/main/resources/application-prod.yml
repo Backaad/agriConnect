@@ -1,0 +1,9 @@
+spring:
+  jpa:
+    show-sql: false
+twilio:
+  enabled: true
+logging:
+  level:
+    com.agriconnect: INFO
+    org.springframework: WARN

@@ -1,0 +1,76 @@
+server:
+  port: 8087
+  servlet:
+    context-path: /api/v1
+
+spring:
+  application:
+    name: notification-service
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:agriconnect_notifications}
+    username: ${DB_USERNAME:agri_user}
+    password: ${DB_PASSWORD:agri_pass}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 15
+      minimum-idle: 3
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: notification-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.agriconnect.*"
+        spring.json.use.type.headers: false
+    listener:
+      ack-mode: MANUAL_IMMEDIATE
+
+jwt:
+  secret: ${JWT_SECRET:bXlTdXBlclNlY3JldEtleUZvckFncmlDb25uZWN0QXBwbGljYXRpb24yMDI2}
+
+firebase:
+  enabled: ${FIREBASE_ENABLED:false}
+  service-account-json: ${FIREBASE_SERVICE_ACCOUNT_JSON:}
+  project-id: ${FIREBASE_PROJECT_ID:agriconnect}
+
+twilio:
+  account-sid: ${TWILIO_ACCOUNT_SID:ACtest}
+  auth-token: ${TWILIO_AUTH_TOKEN:test}
+  from-number: ${TWILIO_FROM_NUMBER:+15005550006}
+  enabled: ${TWILIO_ENABLED:false}
+
+sendgrid:
+  api-key: ${SENDGRID_API_KEY:SG.test}
+  from-email: ${SENDGRID_FROM_EMAIL:no-reply@agriconnect.cm}
+  from-name: "AgriConnect"
+  enabled: ${SENDGRID_ENABLED:false}
+
+notification:
+  retry-attempts: 3
+  retry-delay-ms: 2000
+  max-devices-per-user: 5
+  history-retention-days: 90
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.agriconnect: DEBUG
+    org.springframework.kafka: INFO

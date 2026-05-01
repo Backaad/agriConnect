@@ -1,8 +1,8 @@
 package com.agriconnect.user.domain.enums;
 
 public enum Role {
-    AGRICULTEUR,
-    TRAVAILLEUR,
-    CLIENT,
-    ADMIN
+    FARMER,    // Agriculteur / Producteur
+    WORKER,    // Travailleur agricole
+    CONSUMER,  // Consommateur
+    ADMIN      // Administrateur plateforme
 }

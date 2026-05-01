@@ -3,48 +3,81 @@ package com.agriconnect.payment.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "wallets")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class Wallet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(columnDefinition = "uuid", updatable = false)
+    private UUID id;
 
-    @Column(name = "user_id", nullable = false, unique = true)
-    private Long userId;
+    @Column(nullable = false, unique = true)
+    private UUID userId;
 
     @Column(nullable = false)
-    private BigDecimal balance;
+    @Builder.Default
+    private Long balanceFcfa = 0L;
 
-    @Column(name = "mobile_money_number")
-    private String mobileMoneyNumber; // Numéro de téléphone pour les retraits Tara
+    @Column(nullable = false)
+    @Builder.Default
+    private Long frozenFcfa = 0L;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    @Column(nullable = false, length = 3)
+    @Builder.Default
+    private String currency = "XAF";
 
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    @Column(nullable = false, updatable = false)
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-        if (this.balance == null) {
-            this.balance = BigDecimal.ZERO;
-        }
+    @Column(nullable = false)
+    @Builder.Default
+    private LocalDateTime updatedAt = LocalDateTime.now();
+
+    @Version
+    @Column(nullable = false)
+    @Builder.Default
+    private Long version = 0L;
+
+    public long getAvailableBalance() {
+        return balanceFcfa - frozenFcfa;
     }
 
-    @PreUpdate
-    protected void onUpdate() {
+    public boolean hasEnoughFunds(long amount) {
+        return getAvailableBalance() >= amount;
+    }
+
+    public void credit(long amount) {
+        this.balanceFcfa += amount;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void debit(long amount) {
+        if (this.balanceFcfa < amount) {
+            throw new IllegalStateException("Solde insuffisant");
+        }
+        this.balanceFcfa -= amount;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void freeze(long amount) {
+        if (getAvailableBalance() < amount) {
+            throw new IllegalStateException("Solde disponible insuffisant pour le blocage");
+        }
+        this.frozenFcfa += amount;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void unfreeze(long amount) {
+        if (this.frozenFcfa < amount) {
+            throw new IllegalStateException("Montant gelé insuffisant");
+        }
+        this.frozenFcfa -= amount;
         this.updatedAt = LocalDateTime.now();
     }
 }

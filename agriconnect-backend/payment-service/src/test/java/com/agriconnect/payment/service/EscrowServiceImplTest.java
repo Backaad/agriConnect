@@ -3,6 +3,9 @@ package com.agriconnect.payment.service;
 import com.agriconnect.payment.domain.entity.Escrow;
 import com.agriconnect.payment.domain.entity.Wallet;
 import com.agriconnect.payment.domain.enums.EscrowStatus;
+import com.agriconnect.payment.dto.request.EscrowLockRequest;
+import com.agriconnect.payment.dto.request.EscrowReleaseRequest;
+import com.agriconnect.payment.dto.response.EscrowResponse;
 import com.agriconnect.payment.repository.EscrowRepository;
 import com.agriconnect.payment.repository.TransactionRepository;
 import com.agriconnect.payment.repository.WalletRepository;
@@ -16,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,81 +37,128 @@ class EscrowServiceImplTest {
     @Mock
     private WalletRepository walletRepository;
 
-    @Mock
-    private TaraApiService taraApiService;
-
     @InjectMocks
     private EscrowServiceImpl escrowService;
 
+    private UUID payerId;
+    private UUID payeeId;
+    private UUID referenceId;
+
     @BeforeEach
     void setUp() {
-        // Setup initial if needed
+        payerId = UUID.randomUUID();
+        payeeId = UUID.randomUUID();
+        referenceId = UUID.randomUUID();
     }
 
     @Test
-    void testInitiateEscrow() {
+    void testLockEscrow_Success() {
         // Given
-        Long missionId = 1L;
-        Long farmerId = 10L;
-        Long workerId = 20L;
-        BigDecimal amount = new BigDecimal("1000.00");
+        BigDecimal amount = new BigDecimal("10000");
+        EscrowLockRequest request = EscrowLockRequest.builder()
+                .referenceId(referenceId)
+                .referenceType("JOB_REQUEST")
+                .payerId(payerId)
+                .payeeId(payeeId)
+                .amountFcfa(amount.longValue())
+                .build();
         
-        when(taraApiService.initiatePaymentRequest(anyString(), any(BigDecimal.class)))
-                .thenReturn("TARA-TX-123");
-        
+        Wallet payerWallet = Wallet.builder()
+                .id(UUID.randomUUID())
+                .userId(payerId)
+                .balanceFcfa(20000L)
+                .frozenFcfa(0L)
+                .build();
+
+        when(walletRepository.findByUserIdForUpdate(payerId)).thenReturn(Optional.of(payerWallet));
+        when(escrowRepository.existsByReferenceIdAndStatus(referenceId, EscrowStatus.LOCKED)).thenReturn(false);
         when(escrowRepository.save(any(Escrow.class))).thenAnswer(invocation -> {
             Escrow e = invocation.getArgument(0);
-            e.setId(100L);
+            e.setId(UUID.randomUUID());
             return e;
         });
 
         // When
-        Escrow result = escrowService.initiateEscrow(missionId, farmerId, workerId, amount);
+        EscrowResponse result = escrowService.lock(request);
 
         // Then
         assertNotNull(result);
-        assertEquals(EscrowStatus.PENDING_PAYMENT, result.getStatus());
-        assertEquals("TARA-TX-123", result.getTaraTransactionId());
-        assertEquals(new BigDecimal("40.00"), result.getCommission()); // 4% de 1000
-        assertEquals(new BigDecimal("960.00"), result.getWorkerAmount());
+        assertEquals(EscrowStatus.LOCKED, result.getStatus());
+        assertEquals(amount.longValue(), result.getAmountFcfa());
         
-        verify(taraApiService).initiatePaymentRequest(anyString(), eq(amount));
+        verify(walletRepository).save(any(Wallet.class));
         verify(escrowRepository).save(any(Escrow.class));
     }
 
     @Test
-    void testReleaseEscrow() {
+    void testLockEscrow_InsufficientFunds() {
         // Given
-        Long escrowId = 100L;
+        BigDecimal amount = new BigDecimal("10000");
+        EscrowLockRequest request = EscrowLockRequest.builder()
+                .referenceId(referenceId)
+                .referenceType("JOB_REQUEST")
+                .payerId(payerId)
+                .payeeId(payeeId)
+                .amountFcfa(amount.longValue())
+                .build();
+        
+        Wallet payerWallet = Wallet.builder()
+                .id(UUID.randomUUID())
+                .userId(payerId)
+                .balanceFcfa(5000L)
+                .frozenFcfa(0L)
+                .build();
+
+        when(walletRepository.findByUserIdForUpdate(payerId)).thenReturn(Optional.of(payerWallet));
+        when(escrowRepository.existsByReferenceIdAndStatus(referenceId, EscrowStatus.LOCKED)).thenReturn(false);
+
+        // When & Then
+        assertThrows(Exception.class, () -> escrowService.lock(request));
+    }
+
+    @Test
+    void testReleaseEscrow_Success() {
+        // Given
+        UUID escrowId = UUID.randomUUID();
+        BigDecimal amount = BigDecimal.valueOf(10000);
+        long fee = 300; // 3% of 10000
+        
         Escrow escrow = Escrow.builder()
                 .id(escrowId)
-                .missionId(1L)
-                .farmerId(10L)
-                .workerId(20L)
-                .amount(new BigDecimal("1000.00"))
-                .commission(new BigDecimal("40.00"))
-                .workerAmount(new BigDecimal("960.00"))
-                .status(EscrowStatus.HELD)
+                .referenceId(referenceId)
+                .referenceType("JOB_REQUEST")
+                .payerId(payerId)
+                .payeeId(payeeId)
+                .amountFcfa(amount.longValue())
+                .platformFee(fee)
+                .status(EscrowStatus.LOCKED)
                 .build();
                 
-        Wallet workerWallet = Wallet.builder()
-                .userId(20L)
-                .mobileMoneyNumber("237699999999")
-                .balance(BigDecimal.ZERO)
+        Wallet payeeWallet = Wallet.builder()
+                .id(UUID.randomUUID())
+                .userId(payeeId)
+                .balanceFcfa(0L)
+                .frozenFcfa(0L)
+                .build();
+
+        EscrowReleaseRequest request = EscrowReleaseRequest.builder()
+                .referenceId(escrowId)
                 .build();
 
         when(escrowRepository.findById(escrowId)).thenReturn(Optional.of(escrow));
-        when(walletRepository.findByUserId(20L)).thenReturn(Optional.of(workerWallet));
-        when(taraApiService.transferToMobileMoney(anyString(), any(BigDecimal.class))).thenReturn(true);
-        when(escrowRepository.save(any(Escrow.class))).thenReturn(escrow);
+        when(walletRepository.findByUserIdForUpdate(payeeId)).thenReturn(Optional.of(payeeWallet));
+        when(escrowRepository.save(any(Escrow.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(transactionRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
 
         // When
-        Escrow result = escrowService.releaseEscrow(escrowId);
+        EscrowResponse result = escrowService.release(request);
 
         // Then
         assertNotNull(result);
         assertEquals(EscrowStatus.RELEASED, result.getStatus());
-        verify(taraApiService).transferToMobileMoney("237699999999", new BigDecimal("960.00"));
-        verify(transactionRepository, times(2)).save(any()); // Worker receiving + Platform commission
+        
+        verify(walletRepository).save(any(Wallet.class));
+        verify(escrowRepository, times(2)).save(any(Escrow.class));
+        verify(transactionRepository, times(2)).save(any());
     }
 }

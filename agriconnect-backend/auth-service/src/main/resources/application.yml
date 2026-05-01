@@ -1,0 +1,68 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /api/v1
+
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:agriconnect_auth}
+    username: ${DB_USERNAME:agri_user}
+    password: ${DB_PASSWORD:agri_pass}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+    open-in-view: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 5000ms
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+
+jwt:
+  secret: ${JWT_SECRET:bXlTdXBlclNlY3JldEtleUZvckFncmlDb25uZWN0QXBwbGljYXRpb24yMDI2}
+  access-token-expiry-ms: ${JWT_ACCESS_EXPIRY:900000}
+  refresh-token-expiry-ms: ${JWT_REFRESH_EXPIRY:2592000000}
+
+twilio:
+  account-sid: ${TWILIO_ACCOUNT_SID:ACtest}
+  auth-token: ${TWILIO_AUTH_TOKEN:test}
+  from-number: ${TWILIO_FROM_NUMBER:+15005550006}
+  enabled: ${TWILIO_ENABLED:false}
+
+otp:
+  ttl-minutes: 5
+  max-attempts: 3
+  length: 6
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.agriconnect: DEBUG
+    org.springframework.security: INFO
